@@ -180,6 +180,24 @@ body {
 }
 .feat-card:active .feat-arrow { transform: translateX(4px); color: var(--gold); }
 
+/* Affiliate card — gold-tinted */
+.affiliate-card {
+  border-color: rgba(212,175,55,0.35) !important;
+  background: linear-gradient(135deg, var(--bg-card), rgba(212,175,55,0.05)) !important;
+  text-decoration: none !important;
+}
+.affiliate-card::before {
+  content: 'AD';
+  position: absolute; top: 8px; right: 8px;
+  background: rgba(212,175,55,0.2); color: var(--gold);
+  font-size: 9px; font-weight: 700; padding: 2px 6px;
+  border-radius: 4px; letter-spacing: 0.5px;
+}
+.affiliate-card:active {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 20px rgba(212,175,55,0.15);
+}
+
 /* Active/highlight card */
 .feat-card.active {
   border-color: var(--gold-dim);
