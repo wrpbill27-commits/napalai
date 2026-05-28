@@ -33,17 +33,18 @@ CACHED_LIMIT = "30 per minute"   # cached endpoints — cheap after first hit
 init_db()
 
 # ── Config ──────────────────────────────────────────
-ANTHROPIC_KEY = None
-DEEPSEEK_KEY = None
+ANTHROPIC_KEY = os.environ.get("ANTHROPIC_API_KEY")
+DEEPSEEK_KEY = os.environ.get("DEEPSEEK_API_KEY")
 
+# Fallback: read from .env files (local dev)
 for envpath in [os.path.expanduser("~/.hermes/.env"), ".env"]:
     if os.path.exists(envpath):
         with open(envpath) as f:
             for line in f:
                 line = line.strip()
-                if line.startswith("ANTHROPIC_API_KEY="):
+                if line.startswith("ANTHROPIC_API_KEY=") and not ANTHROPIC_KEY:
                     ANTHROPIC_KEY = line.split("=", 1)[1].strip().strip('"').strip("'")
-                elif line.startswith("DEEPSEEK_API_KEY="):
+                elif line.startswith("DEEPSEEK_API_KEY=") and not DEEPSEEK_KEY:
                     DEEPSEEK_KEY = line.split("=", 1)[1].strip().strip('"').strip("'")
 
 # ── LLM Client ───────────────────────────────────
