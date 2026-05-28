@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>🔮 ดวงดี — AI ดูดวงฟรี</title>
+<meta name="description" content="AI ดูดวงที่แม่นที่สุด — ไพ่ยิปซี จับยาม เลขมงคล ดวงความรัก ฟรี 24 ชม.">
+<link rel="stylesheet" href="/static/style.css">
+
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+     crossorigin="anonymous"></script>
+
+<style>body{opacity:0;animation:fadeIn 0.6s ease forwards}@keyframes fadeIn{to{opacity:1}}</style>
+</head>
+<body>
+
+<!-- Particles -->
+<canvas id="particles"></canvas>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="nav-left">
+    <div class="nav-logo">🔮</div>
+    <div class="nav-brand">
+      <h1>ดวงดี</h1>
+      <span>AI Fortune</span>
+    </div>
+  </div>
+  <div class="nav-avatar">👤</div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-cards">
+    <span class="tarot-float">🃏</span>
+    <span class="tarot-float">🔮</span>
+    <span class="tarot-float">✨</span>
+  </div>
+  <h2>AI ดูดวงที่แม่นที่สุด</h2>
+  <p>ไพ่ยิปซี • จับยาม • เลขมงคล • ดวงความรัก</p>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="document.querySelector('.features').scrollIntoView({behavior:'smooth'})">✨ เริ่มดูดวงฟรี</button>
+    <button class="btn-secondary" onclick="scrollToSection('preview')">🔮 ดูตัวอย่าง</button>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features" id="fortune">
+  <div class="glow-divider"></div>
+  <div class="section-title">เลือกดูดวงของคุณ</div>
+  <div class="section-sub">AI วิเคราะห์ทันที แม่น ฟรี ไม่ต้องรอ</div>
+  <div class="feature-grid">
+    <div class="feat-card fade-up" onclick="openFortune('tarot')">
+      <span class="feat-icon">🃏</span>
+      <h3>ไพ่ยิปซี</h3>
+      <p>สุ่มไพ่ AI วิเคราะห์ดวงรายวัน</p>
+      <span class="feat-arrow">→</span>
+    </div>
+    <div class="feat-card fade-up" onclick="openFortune('yam')">
+      <span class="feat-icon">🎲</span>
+      <h3>จับยาม</h3>
+      <p>ทำนายโชคชะตาจาก 3 เหรียญ</p>
+      <span class="feat-arrow">→</span>
+    </div>
+    <div class="feat-card fade-up" onclick="openFortune('phone')">
+      <span class="feat-icon">📱</span>
+      <h3>เบอร์มงคล</h3>
+      <p>วิเคราะห์เลขมงคล เสริมดวง</p>
+      <span class="feat-arrow">→</span>
+    </div>
+    <div class="feat-card fade-up" onclick="openFortune('compatibility')">
+      <span class="feat-icon">💕</span>
+      <h3>ดวงสมพงษ์</h3>
+      <p>เช็คความเข้ากันของคู่รัก</p>
+      <span class="feat-arrow">→</span>
+    </div>
+    <div class="feat-card fade-up" onclick="openFortune('siamsi')">
+      <span class="feat-icon">🏮</span>
+      <h3>เซียมซี</h3>
+      <p>เสี่ยงเซียมซีความรัก</p>
+      <span class="feat-arrow">→</span>
+    </div>
+    <div class="feat-card fade-up" onclick="openFortune('birthday')">
+      <span class="feat-icon">👶</span>
+      <h3>นิสัยวันเกิด</h3>
+      <p>รู้นิสัยจากวันเกิดคุณ</p>
+      <span class="feat-arrow">→</span>
+    </div>
+    <div class="feat-card fade-up" onclick="openFortune('zodiac')">
+      <span class="feat-icon">♈</span>
+      <h3>12 ราศี</h3>
+      <p>ดูดวงราศีรายวัน</p>
+      <span class="feat-arrow">→</span>
+    </div>
+    <div class="feat-card fade-up" onclick="openFortune('chinese')">
+      <span class="feat-icon">🐉</span>
+      <h3>12 นักษัตร</h3>
+      <p>ดูดวงนักษัตรจีน</p>
+      <span class="feat-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<!-- Ad Slot 1: Top Banner -->
+<div class="ad-slot" style="max-width:600px;margin:0 auto 32px;">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+       data-ad-slot="1234567890"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  <p style="font-size:10px;color:var(--text-muted);margin-top:4px;text-align:center;">— โฆษณา —</p>
+</div>
+
+<!-- Social Proof -->
+<section class="social-proof fade-up" id="preview">
+  <div class="glow-divider"></div>
+  <div class="counter" id="user-count">0</div>
+  <div class="counter-label">ผู้ใช้งานแล้ว</div>
+  <div class="testimonials">
+    <div class="testimonial">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <div class="quote">"ดูดวงฟรีแล้วแม่นมาก! ไพ่ยิปซีตรงกับชีวิตตอนนี้สุดๆ"</div>
+      <div class="author">— น้ำหวาน, กรุงเทพ</div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <div class="quote">"ชอบ UI มาก สวย ใช้งานง่าย ดูดวงฟรีทุกวันเลย"</div>
+      <div class="author">— เจมส์, เชียงใหม่</div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <div class="quote">"วิเคราะห์เบอร์แม่นมาก AI เก่งกว่าที่คิดไว้เยอะ"</div>
+      <div class="author">— ฝน, ขอนแก่น</div>
+    </div>
+  </div>
+</section>
+
+<!-- Premium CTA -->
+<section class="premium-cta fade-up">
+  <div class="premium-card">
+    <h3>🔮 ปลดล็อกดวงแบบละเอียด</h3>
+    <p>วิเคราะห์เจาะลึกทุกราศี รายเดือน รายปี พร้อมวิธีแก้ดวง</p>
+    <button class="btn-premium">ปลดล็อกเลย — ฟรี 7 วัน</button>
+  </div>
+</section>
+
+<!-- Ad Slot 2: Bottom Banner -->
+<div class="ad-slot" style="max-width:600px;margin:0 auto 24px;">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+       data-ad-slot="1234567891"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  <p style="font-size:10px;color:var(--text-muted);margin-top:4px;text-align:center;">— โฆษณา —</p>
+</div>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav">
+  <div class="nav-item active" onclick="scrollTopFn()">
+    <span class="nav-icon">🏠</span> หน้าแรก
+  </div>
+  <div class="nav-item" onclick="document.querySelector('.features').scrollIntoView({behavior:'smooth'})">
+    <span class="nav-icon">🔮</span> ดูดวง
+  </div>
+  <div class="nav-item" onclick="openFortune('tarot')">
+    <span class="nav-icon">✨</span> AI
+  </div>
+  <div class="nav-item">
+    <span class="nav-icon">🕐</span> ประวัติ
+  </div>
+  <div class="nav-item">
+    <span class="nav-icon">👤</span> โปรไฟล์
+  </div>
+</nav>
+
+<!-- Result Panel -->
+<div class="result-panel" id="resultPanel">
+  <button class="result-close" onclick="closeResult()">✕</button>
+  <div class="loader-ring" id="loader">
+    <div class="ring"></div>
+  </div>
+  <div class="result-reading" id="resultContent"></div>
+  <!-- Ad Slot 3: In-Content (shown after reading) -->
+  <div id="resultAd" style="display:none;max-width:336px;margin:24px auto 0;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="1234567892"
+         data-ad-format="rectangle"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <p style="font-size:10px;color:var(--text-muted);margin-top:4px;text-align:center;">— โฆษณา —</p>
+  </div>
+</div>
+
+<!-- Feature Input Panels -->
+<div class="feat-input" id="panel-phone">
+  <button class="close-btn" onclick="closeInput('phone')">✕</button>
+  <div class="section-title">📱 วิเคราะห์เบอร์มือถือ</div>
+  <input type="tel" id="phoneVal" placeholder="กรอกเบอร์ 10 หลัก" maxlength="10">
+  <button class="btn-primary btn-submit" onclick="submitFortune('phone')">🔮 วิเคราะห์</button>
+</div>
+
+<div class="feat-input" id="panel-compatibility">
+  <button class="close-btn" onclick="closeInput('compatibility')">✕</button>
+  <div class="section-title">💕 ดวงสมพงษ์</div>
+  <input type="text" id="compP1" placeholder="ชื่อคุณ">
+  <input type="text" id="compP2" placeholder="ชื่อคนรัก">
+  <button class="btn-primary btn-submit" onclick="submitFortune('compatibility')">💕 เช็คดวง</button>
+</div>
+
+<div class="feat-input" id="panel-birthday">
+  <button class="close-btn" onclick="closeInput('birthday')">✕</button>
+  <div class="section-title">👶 นิสัยตามวันเกิด</div>
+  <select id="birthdayVal">
+    <option value="">เลือกวันที่เกิด</option>
+    <option value="จันทร์">วันจันทร์</option>
+    <option value="อังคาร">วันอังคาร</option>
+    <option value="พุธ">วันพุธ</option>
+    <option value="พฤหัสบดี">วันพฤหัสบดี</option>
+    <option value="ศุกร์">วันศุกร์</option>
+    <option value="เสาร์">วันเสาร์</option>
+    <option value="อาทิตย์">วันอาทิตย์</option>
+  </select>
+  <button class="btn-primary btn-submit" onclick="submitFortune('birthday')">🔮 วิเคราะห์</button>
+</div>
+
+<div class="feat-input" id="panel-zodiac">
+  <button class="close-btn" onclick="closeInput('zodiac')">✕</button>
+  <div class="section-title">♈ เลือกราศี</div>
+  <div class="zodiac-grid" id="zodiacGrid"></div>
+  <button class="btn-primary btn-submit" id="zodiacSubmit" onclick="submitFortune('zodiac')" disabled>🔮 ดูดวง</button>
+</div>
+
+<div class="feat-input" id="panel-chinese">
+  <button class="close-btn" onclick="closeInput('chinese')">✕</button>
+  <div class="section-title">🐉 เลือกปีนักษัตร</div>
+  <div class="zodiac-grid" id="chineseGrid"></div>
+  <button class="btn-primary btn-submit" id="chineseSubmit" onclick="submitFortune('chinese')" disabled>🔮 ดูดวง</button>
+</div>
+
+<script>
+// ── Particles ────────────────────────────────
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize(); window.addEventListener('resize', resize);
+
+class Particle {
+  constructor() {
+    this.reset();
+  }
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2 + 0.5;
+    this.speedX = (Math.random() - 0.5) * 0.3;
+    this.speedY = (Math.random() - 0.5) * 0.3 - 0.2;
+    this.opacity = Math.random() * 0.4 + 0.1;
+    this.life = 0;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    this.life++;
+    if (this.life > 400 || this.y < -20 || this.y > canvas.height + 20) this.reset();
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(212,175,55,${this.opacity})`;
+    ctx.fill();
+    // Glow
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(124,58,237,${this.opacity * 0.2})`;
+    ctx.fill();
+  }
+}
+
+for (let i = 0; i < 50; i++) particles.push(new Particle());
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animate);
+}
+animate();
+
+// ── Counter ──────────────────────────────────
+let count = 120000;
+function animateCounter() {
+  const el = document.getElementById('user-count');
+  const target = 127384;
+  const step = (target - count) / 100;
+  const timer = setInterval(() => {
+    count += step;
+    if (count >= target) { count = target; clearInterval(timer); }
+    el.textContent = Math.floor(count).toLocaleString() + '+';
+  }, 30);
+}
+setTimeout(animateCounter, 500);
+
+// ── Fortune System ───────────────────────────
+const API = {
+  tarot:    ['/api/tarot', {}],
+  yam:      ['/api/yam', {}],
+  siamsi:   ['/api/siamsi', {}],
+  phone:    ['/api/phone', null],
+  compatibility: ['/api/compatibility', null],
+  birthday: ['/api/birthday', null],
+  zodiac:   ['/api/zodiac', null],
+  chinese:  ['/api/chinese', null],
+};
+
+let selectedZodiac = null, selectedChinese = null;
+
+function openFortune(type) {
+  const inputs = ['phone','compatibility','birthday','zodiac','chinese'];
+  if (inputs.includes(type)) {
+    document.getElementById('panel-'+type).classList.add('show');
+    if (type === 'zodiac') buildZodiacGrid();
+    if (type === 'chinese') buildChineseGrid();
+    return;
+  }
+  // Auto-submit types
+  showResult();
+  callAPI(type, {});
+}
+
+function closeInput(type) {
+  document.getElementById('panel-'+type).classList.remove('show');
+}
+
+function submitFortune(type) {
+  let data = {};
+  if (type === 'phone') {
+    const v = document.getElementById('phoneVal').value.trim();
+    if (v.length < 9) return alert('กรุณากรอกเบอร์ 10 หลัก');
+    data = { number: v };
+  } else if (type === 'compatibility') {
+    const p1 = document.getElementById('compP1').value.trim();
+    const p2 = document.getElementById('compP2').value.trim();
+    if (!p1 || !p2) return alert('กรุณากรอกทั้งสองคน');
+    data = { person1: p1, person2: p2 };
+  } else if (type === 'birthday') {
+    const d = document.getElementById('birthdayVal').value;
+    if (!d) return alert('กรุณาเลือกวันเกิด');
+    data = { day: d };
+  } else if (type === 'zodiac') {
+    if (!selectedZodiac) return;
+    data = { sign: selectedZodiac };
+  } else if (type === 'chinese') {
+    if (!selectedChinese) return;
+    data = { year: selectedChinese };
+  }
+  closeInput(type);
+  showResult();
+  callAPI(type, data);
+}
+
+function buildZodiacGrid() {
+  const signs = ['เมษ','พฤษภ','เมถุน','กรกฎ','สิงห์','กันย์','ตุลย์','พิจิก','ธนู','มังกร','กุมภ์','มีน'];
+  const grid = document.getElementById('zodiacGrid');
+  grid.innerHTML = signs.map(s => `<button class="zodiac-btn" onclick="selectZodiac('${s}')">♈ ${s}</button>`).join('');
+  selectedZodiac = null;
+  document.getElementById('zodiacSubmit').disabled = true;
+}
+
+function selectZodiac(s) {
+  selectedZodiac = s;
+  document.querySelectorAll('#zodiacGrid .zodiac-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('#zodiacGrid .zodiac-btn').forEach(b => {
+    if (b.textContent.includes(s)) b.classList.add('selected');
+  });
+  document.getElementById('zodiacSubmit').disabled = false;
+}
+
+function buildChineseGrid() {
+  const years = ['ชวด','ฉลู','ขาล','เถาะ','มะโรง','มะเส็ง','มะเมีย','มะแม','วอก','ระกา','จอ','กุน'];
+  const grid = document.getElementById('chineseGrid');
+  grid.innerHTML = years.map(y => `<button class="zodiac-btn" onclick="selectChinese('${y}')">🐉 ${y}</button>`).join('');
+  selectedChinese = null;
+  document.getElementById('chineseSubmit').disabled = true;
+}
+
+function selectChinese(y) {
+  selectedChinese = y;
+  document.querySelectorAll('#chineseGrid .zodiac-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('#chineseGrid .zodiac-btn').forEach(b => {
+    if (b.textContent.includes(y)) b.classList.add('selected');
+  });
+  document.getElementById('chineseSubmit').disabled = false;
+}
+
+function showResult() {
+  const panel = document.getElementById('resultPanel');
+  panel.classList.add('show');
+  document.getElementById('loader').style.display = 'flex';
+  document.getElementById('resultContent').innerHTML = '';
+  document.getElementById('resultAd').style.display = 'none';
+}
+
+function closeResult() {
+  document.getElementById('resultPanel').classList.remove('show');
+  document.getElementById('resultAd').style.display = 'none';
+}
+
+async function callAPI(type, data) {
+  try {
+    const resp = await fetch(API[type][0], {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    });
+    const json = await resp.json();
+    document.getElementById('loader').style.display = 'none';
+    document.getElementById('resultContent').innerHTML = formatReading(type, json);
+    document.getElementById('resultAd').style.display = 'block';
+  } catch(e) {
+    document.getElementById('loader').style.display = 'none';
+    document.getElementById('resultContent').innerHTML = '<p>ขออภัย ระบบขัดข้อง กรุณาลองใหม่ 🔮</p>';
+    document.getElementById('resultAd').style.display = 'block';
+  }
+}
+
+function formatReading(type, data) {
+  if (data.reading) {
+    return `<p>${data.reading.replace(/\n/g, '<br>')}</p>`;
+  }
+  return `<p>${JSON.stringify(data)}</p>`;
+}
+
+// ── Ad Tracking ─────────────────────────────
+function trackAd(slot) {
+  fetch('/api/stats').catch(()=>{});
+  console.log('📊 Ad:', slot);
+}
+
+// ── Scroll animations ────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+function scrollToSection(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+function scrollTopFn() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

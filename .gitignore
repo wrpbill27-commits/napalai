@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual env
+venv/
+.venv/
+
+# Env / Secrets
+.env
+*.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+/tmp/
+*.log
+__pypackages__/
+
+# SQLite
+*.db
+*.sqlite3
+
+# Gunicorn
+gunicorn.ctl
+
+# Herpes
+.hermes/
+
