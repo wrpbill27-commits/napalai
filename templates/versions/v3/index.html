@@ -650,12 +650,101 @@ section {
   flex: 1;
   text-align: left;
 }
-
 .colorme-value {
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--ivory);
 }
+
+/* ══════════════════════════════════════════
+   SHOPEE AFFILIATE
+   ══════════════════════════════════════════ */
+.affiliate-section {
+  padding: 3rem 1rem 4rem;
+}
+
+.affiliate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 900px;
+  margin: 2rem auto 0;
+}
+
+.affiliate-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.8rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(201, 168, 76, 0.12);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--ivory);
+  transition: all 0.3s;
+}
+
+.affiliate-card:hover {
+  border-color: var(--gold);
+  background: rgba(201, 168, 76, 0.06);
+  transform: translateY(-2px);
+}
+
+.affiliate-icon {
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.affiliate-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+
+.affiliate-card p {
+  font-size: 0.78rem;
+  color: var(--ivory-dim);
+  margin-bottom: 0.8rem;
+}
+
+.affiliate-cta {
+  font-size: 0.75rem;
+  color: var(--gold);
+  font-weight: 500;
+  border: 1px solid var(--gold);
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.affiliate-card:hover .affiliate-cta {
+  background: var(--gold);
+  color: var(--deep);
+}
+
+.affiliate-disclaimer {
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--ivory-muted);
+  margin-top: 1.5rem;
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .affiliate-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .affiliate-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 /* ══════════════════════════════════════════
    ANIMATIONS
@@ -781,6 +870,41 @@ section {
         <span class="chip-icon">👶</span> นิสัยวันเกิด
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+   SHOPEE AFFILIATE
+   ═══════════════════════════════════════ -->
+<section class="affiliate-section">
+  <div class="container">
+    <div class="section-ornament reveal">— ✦ —</div>
+    <h2 class="section-title reveal reveal-delay-1">✨ เสริมดวงด้วยของมงคล</h2>
+    <p class="section-sub reveal reveal-delay-2">เลือกซื้อสินค้ามงคลจาก Shopee ราคาพิเศษ</p>
+    <div class="gold-line"></div>
+
+    <div class="affiliate-grid">
+      <a href="https://s.shopee.co.th/LkQJQjFdC" target="_blank" rel="nofollow sponsored" class="affiliate-card reveal reveal-delay-1">
+        <span class="affiliate-icon">💎</span>
+        <h3>เครื่องรางมงคล</h3>
+        <p>เสริมโชคลาภและการเงิน</p>
+        <span class="affiliate-cta">ดูสินค้า →</span>
+      </a>
+      <a href="https://s.shopee.co.th/8ATHe0bFQ3" target="_blank" rel="nofollow sponsored" class="affiliate-card reveal reveal-delay-2">
+        <span class="affiliate-icon">📿</span>
+        <h3>สร้อยข้อมือมงคล</h3>
+        <p>ใส่แล้วปัง รับทรัพย์ทั้งวัน</p>
+        <span class="affiliate-cta">ดูสินค้า →</span>
+      </a>
+      <a href="https://s.shopee.co.th/11076tSCM1" target="_blank" rel="nofollow sponsored" class="affiliate-card reveal reveal-delay-3">
+        <span class="affiliate-icon">🔮</span>
+        <h3>หินนำโชค</h3>
+        <p>หินมงคลตามราศี เสริมดวงครบ</p>
+        <span class="affiliate-cta">ดูสินค้า →</span>
+      </a>
+    </div>
+
+    <p class="affiliate-disclaimer reveal">* หากซื้อผ่านลิงก์นี้ เราอาจได้รับค่าคอมมิชชันเล็กน้อย — ขอบคุณที่สนับสนุนนภาลัยครับ 🙏</p>
   </div>
 </section>
 
