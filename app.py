@@ -495,7 +495,7 @@ def sitemap_xml():
     ]
     
     # Zodiac landing pages — 12 signs
-    for sign in ZODIAC_SIGNS.keys():
+    for sign in ZODIAC_SIGNS:
         pages.append({
             "loc": f"/ดูดวง/ราศี-{sign}",
             "priority": "0.9", "changefreq": "daily"
@@ -535,7 +535,7 @@ def zodiac_landing(sign):
     """SEO landing page for each zodiac sign."""
     if sign not in ZODIAC_SIGNS:
         return "ไม่พบราศี", 404
-    return render_template("seo_zodiac.html", sign=sign, name_th=ZODIAC_SIGNS[sign])
+    return render_template("seo_zodiac.html", sign=sign, name_th=sign)
 
 @app.route("/สีมงคล/วัน-<day>")
 def colorme_landing(day):

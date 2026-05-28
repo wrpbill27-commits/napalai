@@ -91,9 +91,9 @@
     <section class="seo-section">
       <h2>🔮 ดูดวงราศีอื่นๆ</h2>
       <div class="related-grid">
-        {% for s, name in ZODIAC_SIGNS.items() %}
-        {% if s != sign %}
-        <a href="/ดูดวง/ราศี-{{ s }}" class="related-card">♈ ดูดวงราศี{{ name }}</a>
+        {% for sz in ZODIAC_SIGNS %}
+        {% if sz != sign %}
+        <a href="/ดูดวง/ราศี-{{ sz }}" class="related-card">♈ ดูดวงราศี{{ sz }}</a>
         {% endif %}
         {% endfor %}
       </div>
