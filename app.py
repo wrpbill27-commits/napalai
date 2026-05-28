@@ -85,11 +85,23 @@ def ask_llm(system_prompt, user_prompt):
 
 @app.route("/")
 def index():
-    return render_template("index_new.html")
+    return render_template("index.html")  # v3 — ตัวหลัก
+
+@app.route("/v1")
+def index_v1():
+    return render_template("versions/v1/index.html")
+
+@app.route("/v2")
+def index_v2():
+    return render_template("versions/v2/index.html")
+
+@app.route("/v3")
+def index_v3():
+    return render_template("versions/v3/index.html")
 
 @app.route("/classic")
 def index_classic():
-    return render_template("index.html")
+    return render_template("versions/v1/index.html")
 
 
 @app.route("/api/tarot", methods=["POST"])
@@ -311,16 +323,56 @@ def chinese():
     return jsonify({"year": year, "animal": years[year], "date": today, "reading": reading, "cached": False})
 
 
-# ── สีมงคลประจำวัน ──────────────────────────────
+# ── สีมงคลประจำวัน (อ้างอิง: ฮั่วเซ่งฮง 2569) ──────
 COLORS_OF_DAY = {
-    "อาทิตย์": {"color": "แดง",    "hex": "#FF1744", "planet": "พระอาทิตย์",       "forbidden": "น้ำเงิน"},
-    "จันทร์":  {"color": "เหลือง",  "hex": "#FFD700", "planet": "พระจันทร์",        "forbidden": "แดง"},
-    "อังคาร":  {"color": "ชมพู",   "hex": "#FF69B4", "planet": "พระอังคาร",        "forbidden": "เหลือง, ขาว"},
-    "พุธ":     {"color": "เขียว",   "hex": "#00C853", "planet": "พระพุธ",           "forbidden": "ชมพู"},
-    "ราหู":    {"color": "ดำ",      "hex": "#1a1a1a", "planet": "พระราหู",          "forbidden": "เหลือง, ส้ม"},
-    "พฤหัส":   {"color": "ส้ม",     "hex": "#FF6D00", "planet": "พระพฤหัสบดี",       "forbidden": "ม่วง"},
-    "ศุกร์":    {"color": "ฟ้า",     "hex": "#2196F3", "planet": "พระศุกร์",          "forbidden": "เขียว, เทา"},
-    "เสาร์":    {"color": "ม่วง",    "hex": "#7C3AED", "planet": "พระเสาร์",          "forbidden": "ดำ, น้ำเงินเข้ม"},
+    "จันทร์": {
+        "color": "เหลือง", "hex": "#FFD700", "planet": "พระจันทร์",
+        "career": "ส้ม, น้ำตาล", "money": "ม่วง, ดำ", "love": "เขียว",
+        "health": "ชมพู", "luck": "ฟ้า, น้ำเงิน", "forbidden": "แดง",
+        "lucky_numbers": [1, 5, 15, 19, 28]
+    },
+    "อังคาร": {
+        "color": "ชมพู", "hex": "#FF69B4", "planet": "พระอังคาร",
+        "career": "ม่วง, ชมพู", "money": "ส้ม, น้ำตาล", "love": "ม่วง, ดำ",
+        "health": "เขียว", "luck": "แดง", "forbidden": "เหลือง, ขาว",
+        "lucky_numbers": [2, 8, 14, 22, 35]
+    },
+    "พุธ": {
+        "color": "เขียว", "hex": "#00C853", "planet": "พระพุธ",
+        "career": "ฟ้า, น้ำเงิน", "money": "ม่วง", "love": "ส้ม, น้ำตาล",
+        "health": "ม่วง, ดำ", "luck": "เหลือง, ขาว, เทา", "forbidden": "ชมพู",
+        "lucky_numbers": [3, 7, 11, 21, 33]
+    },
+    "ราหู": {
+        "color": "ดำ", "hex": "#1a1a1a", "planet": "พระราหู",
+        "career": "ฟ้า, น้ำเงิน", "money": "ม่วง", "love": "ส้ม, น้ำตาล",
+        "health": "ม่วง, ดำ", "luck": "เหลือง, ขาว, เทา", "forbidden": "ชมพู",
+        "lucky_numbers": [9, 13, 27, 36, 42]
+    },
+    "พฤหัส": {
+        "color": "ส้ม", "hex": "#FF6D00", "planet": "พระพฤหัสบดี",
+        "career": "เหลือง, ขาว, เทา", "money": "แดง", "love": "ฟ้า, น้ำเงิน",
+        "health": "เทา", "luck": "เขียว", "forbidden": "ม่วง, ดำ",
+        "lucky_numbers": [5, 8, 15, 19, 28]
+    },
+    "ศุกร์": {
+        "color": "ฟ้า", "hex": "#2196F3", "planet": "พระศุกร์",
+        "career": "เขียว", "money": "ชมพู", "love": "เหลือง, ขาว, เทา",
+        "health": "แดง, ส้ม", "luck": "ส้ม, น้ำตาล", "forbidden": "ม่วง",
+        "lucky_numbers": [6, 12, 18, 24, 31]
+    },
+    "เสาร์": {
+        "color": "ม่วง", "hex": "#7C3AED", "planet": "พระเสาร์",
+        "career": "แดง", "money": "ฟ้า, น้ำเงิน", "love": "ม่วง, ชมพู",
+        "health": "ส้ม, เหลือง", "luck": "ชมพู, แดง", "forbidden": "เขียว",
+        "lucky_numbers": [4, 10, 16, 25, 30]
+    },
+    "อาทิตย์": {
+        "color": "แดง", "hex": "#FF1744", "planet": "พระอาทิตย์",
+        "career": "ม่วง, ดำ", "money": "เขียว", "love": "ชมพู",
+        "health": "ขาว, ครีม, เทา", "luck": "ม่วง", "forbidden": "ฟ้า, น้ำเงิน",
+        "lucky_numbers": [7, 11, 17, 23, 29]
+    },
 }
 
 @app.route("/api/colorme", methods=["POST"])
@@ -347,12 +399,34 @@ def colorme():
     
     # AI reading
     system = """คุณเป็นนักพยากรณ์และผู้เชี่ยวชาญด้านโหราศาสตร์ไทย 
-    ตอบด้วยภาษาไทย แบ่งเป็น: ความหมายของสี, เสริมดวงด้านใดวันนี้, 
-    เลขนำโชค, สิ่งที่ควรทำ/ควรเลี่ยง, คำแนะนำสั้นๆ"""
-    
-    prompt = f"วันนี้เป็นวัน{display_day}  ดาวประจำวันคือ{info['planet']}\nสีมงคลของวันนี้คือ {info['color']}\nสีต้องห้าม: {info['forbidden']}\n\nทำนายดวงและให้คำแนะนำการเสริมดวงด้วยสีวันนี้"
+    ตอบด้วยภาษาไทย แบ่งเป็น: เคล็ดลับใส่สีไหนเสริมดวงวันนี้, 
+    เลขนำโชค, คำแนะนำสั้นๆ"""
 
-    reading = ask_llm(system, prompt) or f"🎨 วัน{display_day} สีมงคล: **{info['color']}**\n\n🔮 ดาว{info['planet']} ส่งพลังด้าน{'การสื่อสารและการงาน' if key in ('พุธ','อาทิตย์') else 'ความรักและเสน่หา' if key in ('ศุกร์','จันทร์') else 'ความสำเร็จและโชคลาภ'} ในวันนี้\n\n✨ สวมใส่{info['color']}เสริมดวง หลีกเลี่ยงสี{info['forbidden']}\n🔢 เลขนำโชค: {random.randint(10,99)}"
+    prompt = f"""วัน{display_day} ดาว{info['planet']}
+    สีสำหรับวันนี้ตามหลักฮั่วเซ่งฮง:
+    - การงาน: {info['career']}
+    - การเงิน: {info['money']}
+    - ความรัก: {info['love']}
+    - สุขภาพ: {info['health']}
+    - โชคลาภ: {info['luck']}
+    - ห้ามใส่: {info['forbidden']}
+    
+    แนะนำการแต่งตัวและเคล็ดลับเสริมดวงวันนี้สั้นๆ"""
+
+    reading = ask_llm(system, prompt) or f"""🎨✨ **สีมงคลประจำวัน{display_day}**
+    
+    ใส่สี{info['color']}เสริมภาพรวมวันนี้! นี่คือสีเฉพาะด้าน
+    
+    💼 การงาน → {info['career']}
+    💰 การเงิน → {info['money']}
+    💕 ความรัก → {info['love']}
+    🏥 สุขภาพ → {info['health']}
+    🍀 โชคลาภ → {info['luck']}
+    ❌ หลีกเลี่ยง → {info['forbidden']}
+    
+    🔢 เลขนำโชค: {', '.join(str(n) for n in info['lucky_numbers'])}
+    
+    ✨ {info['planet']} เคล็ดลับ: สวมใส่{info['color']}วันนี้เสริมพลังบวก"""
     
     set("colorme", reading, key, type="daily")
     

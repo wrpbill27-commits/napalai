@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔮 ดวงดี — AI ดูดวงฟรี 8 ศาสตร์ | แม่น ฟรี ไม่ต้องรอ</title>
+<meta name="description" content="ดูดวงฟรีออนไลน์ด้วย AI — ไพ่ยิปซี จับยาม ราศี 12 นักษัตร วิเคราะห์เบอร์ เช็คดวงสมพงษ์ เซียมซี ดูนิสัยวันเกิด ดูดวงฟรี 24 ชั่วโมง แม่น ฟรี ไม่ต้องรอ">
+<meta name="keywords" content="ดูดวง,ดูดวงฟรี,ไพ่ยิปซี,จับยาม,ราศี,นักษัตร,วิเคราะห์เบอร์,เช็คดวง,เซียมซี,ดูดวงออนไลน์,หมอดู,AI ดูดวง">
+<meta property="og:title" content="🔮 ดวงดี — AI ดูดวงฟรี 8 ศาสตร์">
+<meta property="og:description" content="ดูดวงฟรีออนไลน์ด้วย AI — แม่น ฟรี ไม่ต้องรอ ดูได้ 24 ชม.">
+<meta property="og:type" content="website">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://duangdee.onrender.com/">
+
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+     crossorigin="anonymous"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0e0d0b;
+  --surface: #161410;
+  --border: #2a2620;
+  --gold: #c9a84c;
+  --gold-dim: #7a6230;
+  --text: #e8e0d0;
+  --text-muted: #7a7060;
+  --pink: #e091a0;
+  --green: #4a8c5c;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans Thai', sans-serif;
+  min-height: 100vh;
+}
+
+.bg-noise {
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.04) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 20%, rgba(201,168,76,0.03) 0%, transparent 50%);
+  pointer-events: none; z-index: 0;
+}
+
+header {
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+  background: rgba(14,13,11,0.95);
+  backdrop-filter: blur(12px);
+  z-index: 10;
+  padding: 12px 24px;
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px;
+}
+header .logo { font-size: 28px; }
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; color: var(--gold);
+  letter-spacing: 0.05em;
+}
+header .sub { font-size: 12px; color: var(--text-muted); margin-left: 8px; }
+
+main {
+  max-width: 600px; margin: 0 auto;
+  padding: 24px 16px 60px; position: relative; z-index: 1;
+}
+
+.hero {
+  text-align: center; margin-bottom: 28px;
+}
+.hero .icon { font-size: 64px; margin-bottom: 12px; }
+.hero h2 { font-size: 22px; color: var(--text); margin-bottom: 8px; }
+.hero p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+@media (max-width: 400px) { .grid { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.card:hover {
+  border-color: var(--gold-dim);
+  transform: translateY(-2px);
+}
+.card.active {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.06);
+}
+.card .emoji { font-size: 36px; margin-bottom: 8px; display: block; }
+.card .title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.card .desc { font-size: 11px; color: var(--text-muted); }
+
+/* Feature panels */
+.feature-panel {
+  background: var(--surface);
+  border: 1px solid var(--gold-dim);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  display: none;
+}
+.feature-panel.show { display: block; }
+
+.feature-panel h3 {
+  font-size: 18px; color: var(--gold);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.feature-panel .form-group {
+  margin-bottom: 12px;
+}
+.feature-panel label {
+  display: block;
+  font-size: 13px; color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.feature-panel input, .feature-panel select {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.feature-panel input:focus, .feature-panel select:focus {
+  border-color: var(--gold-dim);
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--gold-dim);
+  border: none; border-radius: 8px;
+  color: var(--bg); font-size: 15px;
+  font-weight: 600; font-family: inherit;
+  cursor: pointer; margin-top: 8px;
+  transition: all 0.2s;
+}
+.btn:hover { background: var(--gold); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.result {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: none;
+  font-size: 14px; line-height: 1.8;
+  white-space: pre-wrap;
+  animation: fadeIn 0.4s ease;
+}
+.result.show { display: block; }
+.result .card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; color: var(--gold);
+  display: block; margin-bottom: 8px; text-align: center;
+}
+.result .highlight {
+  color: var(--gold); font-weight: 600;
+}
+
+/* ── Ad Slots ───────────────────────────────── */
+.ad-slot {
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.ad-slot::before {
+  content: "โฆษณา";
+  position: absolute; top: 6px; right: 10px;
+  font-size: 10px; color: var(--text-muted);
+  opacity: 0.6;
+}
+.ad-banner {
+  min-height: 90px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.03));
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.ad-banner:hover { border-color: var(--gold-dim); }
+.ad-banner .ad-content {
+  padding: 8px;
+}
+.ad-banner .ad-title {
+  font-size: 15px; color: var(--gold); font-weight: 600; margin-bottom: 4px;
+}
+.ad-banner .ad-text {
+  font-size: 12px; color: var(--text-muted);
+}
+.ad-card {
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 14px 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+  position: relative;
+}
+.ad-card::before {
+  content: "Ad";
+  position: absolute; top: 4px; right: 8px;
+  font-size: 9px; color: var(--text-muted); opacity: 0.5;
+}
+.ad-card:hover {
+  border-color: var(--gold-dim);
+  transform: translateY(-2px);
+}
+.ad-card .ad-emoji { font-size: 32px; margin-bottom: 6px; display: block; }
+.ad-card .ad-title { font-size: 13px; color: var(--text); font-weight: 600; }
+.ad-card .ad-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+.result-ad {
+  margin-top: 16px;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(201,168,76,0.06), rgba(201,168,76,0.02));
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  text-align: center;
+  font-size: 13px;
+  cursor: pointer;
+  display: none;
+  transition: all 0.2s;
+}
+.result-ad.show { display: block; }
+.result-ad:hover { border-color: var(--gold-dim); }
+.result-ad .ad-tag { color: var(--gold); font-weight: 600; }
+.result-ad .ad-link { color: var(--text-muted); font-size: 12px; margin-top: 4px; }
+
+.footer-ad {
+  max-width: 600px; margin: 0 auto 32px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  position: relative; z-index: 1;
+}
+.footer-ad::before {
+  content: "โฆษณา";
+  position: absolute; top: 6px; right: 10px;
+  font-size: 10px; color: var(--text-muted); opacity: 0.5;
+}
+.footer-ad .ft-title { font-size: 14px; color: var(--gold); font-weight: 600; }
+.footer-ad .ft-text { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+.loader {
+  text-align: center; padding: 12px; display: none;
+}
+.loader.show { display: block; }
+.loader .dots {
+  display: inline-flex; gap: 6px;
+}
+.loader .dots span {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--gold-dim);
+  animation: pulse 1s infinite;
+}
+.loader .dots span:nth-child(2) { animation-delay: 0.2s; }
+.loader .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+.back-btn {
+  background: none; border: 1px solid var(--border);
+  color: var(--text-muted); padding: 8px 16px;
+  border-radius: 6px; cursor: pointer; font-size: 13px;
+  margin-bottom: 12px;
+}
+.back-btn:hover { border-color: var(--gold-dim); color: var(--text); }
+
+.result .tarot-card-visual {
+  width: 120px; height: 200px;
+  margin: 0 auto 16px;
+  background: linear-gradient(135deg, #1a1530, #2d1f4a);
+  border: 2px solid var(--gold);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 60px;
+  box-shadow: 0 0 30px rgba(201,168,76,0.15);
+}
+
+/* Zodiac grid */
+.zodiac-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.zodiac-grid button {
+  padding: 10px 6px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.zodiac-grid button:hover, .zodiac-grid button.selected {
+  border-color: var(--gold-dim);
+  color: var(--text);
+  background: rgba(201,168,76,0.08);
+}
+
+@keyframes pulse { 0%,100% { opacity: 0.3 } 50% { opacity: 1 } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: translateY(0) } }
+
+footer {
+  text-align: center; padding: 32px 16px;
+  font-size: 12px; color: var(--text-muted);
+  position: relative; z-index: 1;
+}
+</style>
+</head>
+<body>
+<div class="bg-noise"></div>
+
+<header>
+  <span class="logo">🔮</span>
+  <h1>ดวงดี</h1>
+  <span class="sub">AI ดูดวงฟรี</span>
+</header>
+
+<main>
+  <div class="hero" id="hero">
+    <div class="icon">✨</div>
+    <h2>วันนี้ดวงคุณเป็นไง?</h2>
+    <p>เลือกดูดวงฟรี 8 ศาสตร์ — AI วิเคราะห์ปั๊บ!<br>แม่น ฟรี ไม่ต้องรอ</p>
+  </div>
+
+  <!-- Ad Slot 1: Google AdSense Banner -->
+  <div class="ad-slot" style="max-width:600px;margin:0 auto 24px;">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <p style="font-size:10px;color:var(--text-muted);margin-top:4px;">— โฆษณา —</p>
+  </div>
+
+  <div class="grid" id="grid">
+    <div class="card" onclick="showFeature('tarot')">
+      <span class="emoji">🃏</span>
+      <div class="title">ไพ่ยิปซี</div>
+      <div class="desc">เลือกไพ่ 1 ใบ — ทำนายดวงวันนี้</div>
+    </div>
+    <div class="card" onclick="showFeature('yam')">
+      <span class="emoji">🎲</span>
+      <div class="title">จับยาม</div>
+      <div class="desc">เสี่ยงทาย 3 เหรียญ — รู้ดวง</div>
+    </div>
+    <div class="card" onclick="showFeature('phone')">
+      <span class="emoji">📱</span>
+      <div class="title">เบอร์มือถือ</div>
+      <div class="desc">วิเคราะห์เลขเบอร์ — ดวงดี/เสีย</div>
+    </div>
+    <div class="card" onclick="showFeature('compatibility')">
+      <span class="emoji">💕</span>
+      <div class="title">ดวงสมพงษ์</div>
+      <div class="desc">เช็คความเข้ากัน — คู่แท้?</div>
+    </div>
+    <div class="card" onclick="showFeature('siamsi')">
+      <span class="emoji">🏮</span>
+      <div class="title">เซียมซี</div>
+      <div class="desc">เซียมซีความรัก — เนื้อคู่?</div>
+    </div>
+    <div class="card" onclick="showFeature('birthday')">
+      <span class="emoji">👶</span>
+      <div class="title">นิสัยวันเกิด</div>
+      <div class="desc">เกิดวันไหน — นิสัยแบบไหน</div>
+    </div>
+    <div class="card" onclick="showFeature('zodiac')">
+      <span class="emoji">♈</span>
+      <div class="title">ราศี 12</div>
+      <div class="desc">ดูดวงรายวันตามราศี</div>
+    </div>
+    <div class="card" onclick="showFeature('chinese')">
+      <span class="emoji">🐉</span>
+      <div class="title">นักษัตร 12</div>
+      <div class="desc">ดูดวงตามปีนักษัตร</div>
+    </div>
+    <!-- Ad Slot 2: Shopee Affiliate — สายมู -->
+    <a class="ad-card" href="https://shope.ee/XXXXXXXXXXXXXXXXX" target="_blank" rel="nofollow sponsored" onclick="trackAdClick('affiliate-grid')">
+      <span class="ad-emoji">💎</span>
+      <div class="ad-title">สร้อยหินมงคล</div>
+      <div class="ad-desc">เสริมดวง ราคาพิเศษ!</div>
+    </a>
+  </div>
+
+  <!-- Feature panels -->
+  <div class="feature-panel" id="panel-tarot">
+    <button class="back-btn" onclick="hideFeatures()">← กลับ</button>
+    <h3>🃏 ไพ่ยิปซี — เลือกไพ่ 1 ใบ</h3>
+    <p style="text-align:center;color:var(--text-muted);font-size:13px;margin-bottom:12px">ตั้งจิตอธิษฐาน แล้วกดเปิดไพ่</p>
+    <button class="btn" onclick="doTarot()">✨ เปิดไพ่</button>
+    <div class="loader" id="loader-tarot"><div class="dots"><span></span><span></span><span></span></div></div>
+    <div class="result" id="result-tarot"></div>
+    <div class="result-ad" id="ad-tarot">
+      <a href="https://shope.ee/XXXXXXXXXXXXXXXXX" target="_blank" rel="nofollow sponsored" onclick="trackAdClick('affiliate-result')" style="text-decoration:none;color:inherit;">
+        <div class="ad-tag">💎 เสริมดวงด้วยหินมงคล</div>
+        <div class="ad-link">สร้อยข้อมือหินแท้ ราคาพิเศษ — คลิกดูเลย!</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="feature-panel" id="panel-yam">
+    <button class="back-btn" onclick="hideFeatures()">← กลับ</button>
+    <h3>🎲 จับยาม — เสี่ยงทาย 3 เหรียญ</h3>
+    <p style="text-align:center;color:var(--text-muted);font-size:13px;margin-bottom:12px">ตั้งจิตถามสิ่งที่อยากรู้ แล้วกดเสี่ยงทาย</p>
+    <button class="btn" onclick="doYam()">🪙 โยนเหรียญ</button>
+    <div class="loader" id="loader-yam"><div class="dots"><span></span><span></span><span></span></div></div>
+    <div class="result" id="result-yam"></div>
+  </div>
+
+  <div class="feature-panel" id="panel-phone">
+    <button class="back-btn" onclick="hideFeatures()">← กลับ</button>
+    <h3>📱 วิเคราะห์เบอร์มือถือ</h3>
+    <div class="form-group">
+      <label>เบอร์โทรศัพท์</label>
+      <input type="tel" id="phone-input" placeholder="0812345678" maxlength="10">
+    </div>
+    <button class="btn" onclick="doPhone()">🔢 วิเคราะห์</button>
+    <div class="loader" id="loader-phone"><div class="dots"><span></span><span></span><span></span></div></div>
+    <div class="result" id="result-phone"></div>
+  </div>
+
+  <div class="feature-panel" id="panel-compatibility">
+    <button class="back-btn" onclick="hideFeatures()">← กลับ</button>
+    <h3>💕 เช็คดวงสมพงษ์</h3>
+    <div class="form-group">
+      <label>ชื่อ / วันเกิด คนที่ 1</label>
+      <input id="comp-p1" placeholder="เช่น เอ เกิดวันจันทร์">
+    </div>
+    <div class="form-group">
+      <label>ชื่อ / วันเกิด คนที่ 2</label>
+      <input id="comp-p2" placeholder="เช่น บี เกิดวันพุธ">
+    </div>
+    <button class="btn" onclick="doCompatibility()">💘 ดูดวงคู่</button>
+    <div class="loader" id="loader-compatibility"><div class="dots"><span></span><span></span><span></span></div></div>
+    <div class="result" id="result-compatibility"></div>
+  </div>
+
+  <div class="feature-panel" id="panel-siamsi">
+    <button class="back-btn" onclick="hideFeatures()">← กลับ</button>
+    <h3>🏮 เซียมซีความรัก</h3>
+    <p style="text-align:center;color:var(--text-muted);font-size:13px;margin-bottom:12px">อธิษฐานถึงคนที่อยากรู้ แล้วเขย่าเซียมซี</p>
+    <button class="btn" onclick="doSiamsi()">🎋 เขย่าเซียมซี</button>
+    <div class="loader" id="loader-siamsi"><div class="dots"><span></span><span></span><span></span></div></div>
+    <div class="result" id="result-siamsi"></div>
+  </div>
+
+  <div class="feature-panel" id="panel-birthday">
+    <button class="back-btn" onclick="hideFeatures()">← กลับ</button>
+    <h3>👶 นิสัยตามวันเกิด</h3>
+    <div class="form-group">
+      <label>วันเกิด</label>
+      <select id="birthday-select">
+        <option value="">— เลือกวันเกิด —</option>
+        <option value="จันทร์">วันจันทร์</option><option value="อังคาร">วันอังคาร</option>
+        <option value="พุธ">วันพุธ</option><option value="พฤหัสบดี">วันพฤหัสบดี</option>
+        <option value="ศุกร์">วันศุกร์</option><option value="เสาร์">วันเสาร์</option>
+        <option value="อาทิตย์">วันอาทิตย์</option>
+      </select>
+    </div>
+    <button class="btn" onclick="doBirthday()">🌟 ดูนิสัย</button>
+    <div class="loader" id="loader-birthday"><div class="dots"><span></span><span></span><span></span></div></div>
+    <div class="result" id="result-birthday"></div>
+  </div>
+
+  <div class="feature-panel" id="panel-zodiac">
+    <button class="back-btn" onclick="hideFeatures()">← กลับ</button>
+    <h3>♈ ดูดวงรายวัน — 12 ราศี</h3>
+    <div class="zodiac-grid">
+      <button onclick="selectZodiac('เมษ')">♈ เมษ</button><button onclick="selectZodiac('พฤษภ')">♉ พฤษภ</button>
+      <button onclick="selectZodiac('เมถุน')">♊ เมถุน</button><button onclick="selectZodiac('กรกฎ')">♋ กรกฎ</button>
+      <button onclick="selectZodiac('สิงห์')">♌ สิงห์</button><button onclick="selectZodiac('กันย์')">♍ กันย์</button>
+      <button onclick="selectZodiac('ตุลย์')">♎ ตุลย์</button><button onclick="selectZodiac('พิจิก')">♏ พิจิก</button>
+      <button onclick="selectZodiac('ธนู')">♐ ธนู</button><button onclick="selectZodiac('มังกร')">♑ มังกร</button>
+      <button onclick="selectZodiac('กุมภ์')">♒ กุมภ์</button><button onclick="selectZodiac('มีน')">♓ มีน</button>
+    </div>
+    <div class="loader" id="loader-zodiac"><div class="dots"><span></span><span></span><span></span></div></div>
+    <div class="result" id="result-zodiac"></div>
+  </div>
+
+  <div class="feature-panel" id="panel-chinese">
+    <button class="back-btn" onclick="hideFeatures()">← กลับ</button>
+    <h3>🐉 ดูดวงนักษัตร — 12 ปีเกิด</h3>
+    <div class="zodiac-grid">
+      <button onclick="selectChinese('ชวด')">🐭 ชวด</button><button onclick="selectChinese('ฉลู')">🐮 ฉลู</button>
+      <button onclick="selectChinese('ขาล')">🐯 ขาล</button><button onclick="selectChinese('เถาะ')">🐰 เถาะ</button>
+      <button onclick="selectChinese('มะโรง')">🐲 มะโรง</button><button onclick="selectChinese('มะเส็ง')">🐍 มะเส็ง</button>
+      <button onclick="selectChinese('มะเมีย')">🐴 มะเมีย</button><button onclick="selectChinese('มะแม')">🐐 มะแม</button>
+      <button onclick="selectChinese('วอก')">🐵 วอก</button><button onclick="selectChinese('ระกา')">🐔 ระกา</button>
+      <button onclick="selectChinese('จอ')">🐶 จอ</button><button onclick="selectChinese('กุน')">🐷 กุน</button>
+    </div>
+    <div class="loader" id="loader-chinese"><div class="dots"><span></span><span></span><span></span></div></div>
+    <div class="result" id="result-chinese"></div>
+  </div>
+</main>
+
+<!-- Ad Slot 3: Google AdSense Footer + Contact -->
+<div style="max-width:600px;margin:0 auto 20px;">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+       data-ad-slot="0987654321"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- ติดต่อลงโฆษณา -->
+<div style="max-width:600px;margin:0 auto 40px;text-align:center;">
+  <p style="color:var(--gold);font-weight:600;margin-bottom:4px;">📢 สนใจลงโฆษณากับเรา?</p>
+  <p style="color:var(--text-muted);font-size:13px;">เข้าถึงคนไทยสายมูหลักหมื่นคน/เดือน | <a href="mailto:ads@duangdee.com" style="color:var(--gold-dim);">ads@duangdee.com</a></p>
+</div>
+
+<footer>🔮 AI ดูดวงฟรี — เพื่อความบันเทิง | © 2025 DuangDee</footer>
+
+<script>
+let currentFeature = null;
+
+function showFeature(name) {
+  hideFeatures();
+  currentFeature = name;
+  document.getElementById('panel-' + name).classList.add('show');
+  document.getElementById('hero').style.display = 'none';
+  document.getElementById('grid').style.display = 'none';
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function hideFeatures() {
+  currentFeature = null;
+  document.querySelectorAll('.feature-panel').forEach(p => p.classList.remove('show'));
+  document.querySelectorAll('.result').forEach(r => { r.classList.remove('show'); r.innerHTML = ''; });
+  document.querySelectorAll('.loader').forEach(l => l.classList.remove('show'));
+  document.getElementById('hero').style.display = '';
+  document.getElementById('grid').style.display = '';
+}
+
+async function doFetch(url, body, feature) {
+  const loader = document.getElementById('loader-' + feature);
+  const result = document.getElementById('result-' + feature);
+  loader.classList.add('show');
+  result.classList.remove('show');
+  
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    loader.classList.remove('show');
+    
+    if (data.error) {
+      result.innerHTML = '⚠️ ' + data.error;
+    } else {
+      result.innerHTML = formatReading(data, feature);
+    }
+    result.classList.add('show');
+  } catch(e) {
+    loader.classList.remove('show');
+    result.innerHTML = '⚠️ การเชื่อมต่อผิดพลาด — ลองใหม่นะ';
+    result.classList.add('show');
+  }
+}
+
+function formatReading(data, feature) {
+  let html = '';
+  
+  if (feature === 'tarot' && data.card) {
+    html = '<div class="tarot-card-visual">🔮</div>';
+    html += '<span class="card-name">' + data.card.th + '</span>';
+    html += '<small style="color:var(--text-muted);display:block;text-align:center;margin-bottom:12px">' + data.card.name + '</small>';
+  }
+  
+  if (feature === 'yam' && data.coins) {
+    html += '<div style="text-align:center;font-size:28px;margin-bottom:8px">';
+    data.coins.forEach(c => html += (c === 'หัว' ? '🪙' : '🪙‍'));
+    html += '</div>';
+    html += '<p style="text-align:center;color:var(--text-muted);margin-bottom:12px">' + data.coins.join(' • ') + '</p>';
+  }
+  
+  if (feature === 'phone' && data.sum) {
+    html += '<p style="text-align:center;margin-bottom:12px">📱 ' + data.number + ' → <span class="highlight">' + data.sum + '</span></p>';
+  }
+  
+  if (feature === 'compatibility') {
+    html += '<p style="text-align:center;margin-bottom:12px">💕 ' + data.person1 + ' & ' + data.person2 + '</p>';
+  }
+  
+  if (feature === 'siamsi' && data.number) {
+    html += '<div style="text-align:center;font-size:40px;margin-bottom:8px">🏮</div>';
+    html += '<p style="text-align:center;color:var(--text-muted);margin-bottom:12px">เซียมซีใบที่ <span class="highlight">' + data.number + '</span></p>';
+  }
+  
+  if (feature === 'birthday' && data.day) {
+    html += '<p style="text-align:center;margin-bottom:12px">👶 เกิดวัน<span class="highlight">' + data.day + '</span></p>';
+  }
+  
+  if (feature === 'zodiac' && data.sign) {
+    html += '<p style="text-align:center;margin-bottom:12px">♈ ราศี<span class="highlight">' + data.sign + '</span> — ' + data.date + '</p>';
+  }
+  
+  if (feature === 'chinese' && data.year) {
+    html += '<p style="text-align:center;margin-bottom:12px">🐉 ปี<span class="highlight">' + data.year + '</span> (' + data.animal + ') — ' + data.date + '</p>';
+  }
+  
+  // Format reading text — make section headers bold + gold
+  let reading = (data.reading || '').replace(/\*\*(.*?)\*\*/g, '<span class="highlight">$1</span>');
+  html += reading.replace(/\n/g, '<br>');
+  
+  return html;
+}
+
+function doTarot() { doFetch('/api/tarot', {}, 'tarot'); }
+function doYam() { doFetch('/api/yam', {}, 'yam'); }
+
+function doPhone() {
+  const num = document.getElementById('phone-input').value.trim();
+  if (!num || num.length < 9) { alert('กรุณากรอกเบอร์โทร 10 หลัก'); return; }
+  doFetch('/api/phone', {number: num}, 'phone');
+}
+
+function doCompatibility() {
+  const p1 = document.getElementById('comp-p1').value.trim();
+  const p2 = document.getElementById('comp-p2').value.trim();
+  if (!p1 || !p2) { alert('กรุณากรอกข้อมูลทั้งสองคน'); return; }
+  doFetch('/api/compatibility', {person1: p1, person2: p2}, 'compatibility');
+}
+
+function doSiamsi() { doFetch('/api/siamsi', {}, 'siamsi'); }
+
+function doBirthday() {
+  const day = document.getElementById('birthday-select').value;
+  if (!day) { alert('กรุณาเลือกวันเกิด'); return; }
+  doFetch('/api/birthday', {day: day}, 'birthday');
+}
+
+function selectZodiac(sign) {
+  document.querySelectorAll('#panel-zodiac .zodiac-grid button').forEach(b => b.classList.remove('selected'));
+  event.target.classList.add('selected');
+  doFetch('/api/zodiac', {sign: sign}, 'zodiac');
+}
+
+function selectChinese(year) {
+  document.querySelectorAll('#panel-chinese .zodiac-grid button').forEach(b => b.classList.remove('selected'));
+  event.target.classList.add('selected');
+  doFetch('/api/chinese', {year: year}, 'chinese');
+}
+
+// ── Ad Tracking ────────────────────────────────
+function trackAdClick(slot) {
+  // Fire-and-forget analytics
+  fetch('/api/stats', {method: 'GET'}).catch(()=>{});
+  console.log('📊 Ad clicked:', slot);
+  // In production: redirect to affiliate / premium landing
+  // window.open('https://your-premium-link.com', '_blank');
+}
+
+// Show result-ad when reading appears
+const adObserver = new MutationObserver(() => {
+  document.querySelectorAll('.result.show').forEach(r => {
+    const panel = r.closest('.feature-panel');
+    if (panel) {
+      const ad = panel.querySelector('.result-ad');
+      if (ad && !ad.classList.contains('show')) {
+        setTimeout(() => ad.classList.add('show'), 500);
+      }
+    }
+  });
+});
+document.querySelectorAll('.feature-panel').forEach(p => {
+  adObserver.observe(p, {childList: true, subtree: true});
+});
+</script>
+</body>
+</html>
