@@ -260,7 +260,7 @@ section {
 }
 
 @media (min-width: 768px) {
-  .service-grid { grid-template-columns: repeat(3, 1fr); }
+  .service-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 }
 
 .service-card {
@@ -313,6 +313,77 @@ section {
   color: var(--ivory-muted);
   line-height: 1.6;
 }
+
+/* ══════════════════════════════════════════
+   AD CARD (native ad — เหมือน service-card)
+   ══════════════════════════════════════════ */
+.ad-card {
+  background: var(--bg-card);
+  border: 1px dashed var(--gold-dim);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  transition: all 0.4s var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.ad-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(201,168,76,0.03) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-smooth);
+  pointer-events: none;
+}
+
+.ad-card:hover::after { opacity: 1; }
+.ad-card:hover {
+  border-color: var(--gold);
+  border-style: solid;
+}
+
+.ad-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  color: var(--navy-dark);
+  font-family: 'Sarabun', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  letter-spacing: 0.05em;
+}
+
+.ad-chip {
+  background: var(--bg-card);
+  border: 1px dashed rgba(201,168,76,0.2);
+  padding: 1rem;
+  text-align: center;
+  transition: all 0.3s var(--ease-smooth);
+  font-family: 'Sarabun', sans-serif;
+  font-size: 0.82rem;
+  color: var(--ivory-dim);
+  position: relative;
+}
+
+.ad-chip::before {
+  content: 'โฆษณา';
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  font-size: 0.55rem;
+  color: var(--gold-dim);
+  letter-spacing: 0.05em;
+}
+
+.ad-chip:hover {
+  border-color: var(--gold);
+  border-style: solid;
+}
+
+.ad-chip .chip-icon { display: block; font-size: 1.4rem; margin-bottom: 0.35rem; }
 
 /* ══════════════════════════════════════════
    MORE SERVICES (HIDDEN GRID)
@@ -780,6 +851,14 @@ section {
   .modal-panel { padding: 2rem 1.2rem; }
 }
 </style>
+<!-- ═══════════════════════════════════════
+   AdSense — เปลี่ยน ca-pub-XXXXXXXXXXXXXXXX เป็น Publisher ID จริง
+   ═══════════════════════════════════════ -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+     crossorigin="anonymous"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 </head>
 <body>
 
@@ -837,6 +916,21 @@ section {
         <p class="service-desc">พยากรณ์ตามราศี<br>และตำแหน่งดาวนพเคราะห์</p>
       </div>
 
+      <!-- [AD] ช่องที่ 1 — ระหว่างดูดวงชะตากับไพ่ทาโรต์ -->
+      <div class="ad-card reveal reveal-delay-1">
+        <span class="ad-badge">⚡ โฆษณา</span>
+        <span class="service-icon">✨</span>
+        <h3 class="service-name">ค้นพบเพิ่มเติม</h3>
+        <p class="service-desc">สินค้าและบริการ<br>ที่ท่านอาจสนใจ</p>
+        <!-- AdSense: ca-pub-XXXXXXXXXXXXXXXX -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="1111111111"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+      </div>
+
       <!-- ไพ่ทาโรต์ -->
       <div class="service-card reveal reveal-delay-2" onclick="openFortune('tarot')">
         <span class="service-icon">🃏</span>
@@ -857,6 +951,10 @@ section {
       <div class="more-service-chip" onclick="openFortune('yam')">
         <span class="chip-icon">🎲</span> จับยาม 3 เหรียญ
       </div>
+      <!-- [AD] ช่องที่ 2 — ระหว่างจับยามกับเบอร์มงคล -->
+      <div class="ad-chip reveal reveal-delay-4">
+        <span class="chip-icon">✨</span> โฆษณา
+      </div>
       <div class="more-service-chip" onclick="openFortune('phone')">
         <span class="chip-icon">📱</span> เบอร์มงคล
       </div>
@@ -868,6 +966,10 @@ section {
       </div>
       <div class="more-service-chip" onclick="openFortune('birthday')">
         <span class="chip-icon">👶</span> นิสัยวันเกิด
+      </div>
+      <!-- [AD] ช่องที่ 3 — ติดกับนิสัยวันเกิด -->
+      <div class="ad-chip reveal reveal-delay-4">
+        <span class="chip-icon">✨</span> โฆษณา
       </div>
     </div>
   </div>
