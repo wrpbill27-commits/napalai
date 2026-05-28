@@ -32,6 +32,16 @@ CACHED_LIMIT = "30 per minute"   # cached endpoints — cheap after first hit
 # Init DB on startup
 init_db()
 
+# Jinja2 context — make vars available to all templates
+@app.context_processor
+def inject_globals():
+    from datetime import datetime as dt
+    return {
+        "ZODIAC_SIGNS": ZODIAC_SIGNS,
+        "COLORS_OF_DAY": COLORS_OF_DAY,
+        "now": dt.now().strftime("%Y-%m-%d")
+    }
+
 # ── Config ──────────────────────────────────────────
 ANTHROPIC_KEY = os.environ.get("ANTHROPIC_API_KEY")
 DEEPSEEK_KEY = os.environ.get("DEEPSEEK_API_KEY")
@@ -464,6 +474,85 @@ def ratelimit_error(e):
 @app.errorhandler(500)
 def server_error(e):
     return jsonify({"error": "ระบบขัดข้องชั่วคราว กรุณาลองใหม่ภายหลัง 🔮"}), 500
+
+
+# ── SEO ──────────────────────────────────────────────
+@app.route("/robots.txt")
+def robots_txt():
+    return app.send_static_file("robots.txt")
+
+@app.route("/sitemap.xml")
+def sitemap_xml():
+    """Dynamic sitemap — all public pages."""
+    base = request.host_url.rstrip("/")
+    today = datetime.now().strftime("%Y-%m-%d")
+    
+    pages = [
+        {"loc": "/", "priority": "1.0", "changefreq": "daily"},
+        {"loc": "/v1", "priority": "0.5", "changefreq": "monthly"},
+        {"loc": "/v2", "priority": "0.5", "changefreq": "monthly"},
+        {"loc": "/v3", "priority": "0.8", "changefreq": "daily"},
+    ]
+    
+    # Zodiac landing pages — 12 signs
+    for sign in ZODIAC_SIGNS.keys():
+        pages.append({
+            "loc": f"/ดูดวง/ราศี-{sign}",
+            "priority": "0.9", "changefreq": "daily"
+        })
+    
+    # Color of the day — 7 days + ราหู
+    for day in list(COLORS_OF_DAY.keys()):
+        pages.append({
+            "loc": f"/สีมงคล/วัน-{day}",
+            "priority": "0.8", "changefreq": "daily"
+        })
+    
+    # Chinese zodiac
+    for year in ["ชวด","ฉลู","ขาล","เถาะ","มะโรง","มะเส็ง","มะเมีย","มะแม","วอก","ระกา","จอ","กุน"]:
+        pages.append({
+            "loc": f"/นักษัตร/ปี-{year}",
+            "priority": "0.7", "changefreq": "daily"
+        })
+    
+    xml = ['<?xml version="1.0" encoding="UTF-8"?>']
+    xml.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+    for p in pages:
+        xml.append(f'  <url>')
+        xml.append(f'    <loc>{base}{p["loc"]}</loc>')
+        xml.append(f'    <lastmod>{today}</lastmod>')
+        xml.append(f'    <changefreq>{p["changefreq"]}</changefreq>')
+        xml.append(f'    <priority>{p["priority"]}</priority>')
+        xml.append(f'  </url>')
+    xml.append('</urlset>')
+    
+    return "\n".join(xml), 200, {"Content-Type": "application/xml"}
+
+
+# ── Programmatic SEO Landing Pages ──────────────────
+@app.route("/ดูดวง/ราศี-<sign>")
+def zodiac_landing(sign):
+    """SEO landing page for each zodiac sign."""
+    if sign not in ZODIAC_SIGNS:
+        return "ไม่พบราศี", 404
+    return render_template("seo_zodiac.html", sign=sign, name_th=ZODIAC_SIGNS[sign])
+
+@app.route("/สีมงคล/วัน-<day>")
+def colorme_landing(day):
+    """SEO landing page for color of the day."""
+    if day not in COLORS_OF_DAY:
+        return "ไม่พบข้อมูล", 404
+    return render_template("seo_colorme.html", day=day, data=COLORS_OF_DAY[day])
+
+@app.route("/นักษัตร/ปี-<year>")
+def chinese_landing(year):
+    """SEO landing page for Chinese zodiac."""
+    years = {"ชวด":"หนู","ฉลู":"วัว","ขาล":"เสือ","เถาะ":"กระต่าย",
+             "มะโรง":"งูใหญ่","มะเส็ง":"งูเล็ก","มะเมีย":"ม้า","มะแม":"แพะ",
+             "วอก":"ลิง","ระกา":"ไก่","จอ":"หมา","กุน":"หมู"}
+    if year not in years:
+        return "ไม่พบปีนักษัตร", 404
+    return render_template("seo_chinese.html", year=year, animal=years[year])
 
 
 # ── Main ────────────────────────────────────────────

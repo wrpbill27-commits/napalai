@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สีมงคลวัน{{ day }} 2569 — ใส่สีอะไรดี เสริมดวงครบ | นภาลัย</title>
+  <meta name="description" content="สีมงคลวัน{{ day }} 🎨 ใส่สีอะไรดี? {{ data.color }}! ดูดวงสีมงคลตามตำราฮั่วเซ่งฮง ครอบคลุม การงาน การเงิน ความรัก สุขภาพ โชคลาภ พร้อมสีต้องห้าม">
+  <meta name="keywords" content="สีมงคลวัน{{ day }}, ใส่สีอะไรดี, สีมงคล 2569, สีเสื้อมงคลวัน{{ day }}, ดวงสี{{ data.color }}, ฮั่วเซ่งฮง">
+  
+  <meta property="og:title" content="สีมงคลวัน{{ day }} — ใส่สี{{ data.color }} เสริมดวง | นภาลัย">
+  <meta property="og:description" content="วัน{{ day }}นี้ใส่สี{{ data.color }}! ดูดวงสีมงคลตามตำราฮั่วเซ่งฮงครบทุกด้าน">
+  <meta property="og:url" content="https://napalai.onrender.com/สีมงคล/วัน-{{ day }}">
+  <meta property="og:type" content="article">
+  
+  <link rel="canonical" href="https://napalai.onrender.com/สีมงคล/วัน-{{ day }}">
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "สีมงคลวัน{{ day }} 2569 — ใส่สีอะไรดี เสริมดวงการงาน การเงิน ความรัก",
+    "description": "ดูดวงสีมงคลวัน{{ day }}ตามตำราฮั่วเซ่งฮง สีประจำวันคือ{{ data.color }} ครอบคลุมทุกด้าน การงาน การเงิน ความรัก สุขภาพ",
+    "author": {"@type": "Organization", "name": "นภาลัย"},
+    "publisher": {"@type": "Organization", "name": "นภาลัย", "url": "https://napalai.onrender.com"}
+  }
+  </script>
+  
+  {% include 'seo_style.html' %}
+</head>
+<body>
+  {% include 'seo_header.html' %}
+  
+  <main class="seo-content">
+    <div class="breadcrumbs">
+      <a href="/">🏠 หน้าแรก</a> › <a href="/#services">สีมงคล</a> › <strong>วัน{{ day }}</strong>
+    </div>
+    
+    <h1>🎨 สีมงคลวัน{{ day }} — ใส่สีอะไรดี?</h1>
+    <p class="lead">วัน{{ day }}นี้ <strong style="color:var(--gold)">ใส่สี{{ data.color }}</strong> {{ data.hex }} เสริมดวงตามตำราฮั่วเซ่งฮง</p>
+    
+    <div class="cta-primary" onclick="window.location='/'">
+      ✨ ดูสีมงคล + ดูดวงฟรี → คลิกเลย!
+    </div>
+    
+    <!-- Color Swatch -->
+    <section class="seo-section" style="text-align:center">
+      <span class="color-swatch" style="background:{{ data.hex }}"></span>
+      <h2 style="display:inline;vertical-align:middle;margin-left:1rem">{{ data.color }} — {{ data.planet }}</h2>
+    </section>
+    
+    <!-- Color Details Grid -->
+    <section class="seo-section">
+      <h2>📊 สีมงคลวัน{{ day }}แยกตามหมวด</h2>
+      <div class="color-grid">
+        <div class="color-item">
+          <span class="label">💼 การงาน</span>
+          <span class="value">{{ data.career or "—" }}</span>
+        </div>
+        <div class="color-item">
+          <span class="label">💰 การเงิน</span>
+          <span class="value">{{ data.money or "—" }}</span>
+        </div>
+        <div class="color-item">
+          <span class="label">💕 ความรัก</span>
+          <span class="value">{{ data.love or "—" }}</span>
+        </div>
+        <div class="color-item">
+          <span class="label">🏥 สุขภาพ</span>
+          <span class="value">{{ data.health or "—" }}</span>
+        </div>
+        <div class="color-item">
+          <span class="label">🍀 โชคลาภ</span>
+          <span class="value">{{ data.luck or "—" }}</span>
+        </div>
+        <div class="color-item">
+          <span class="label">⚠️ หลีกเลี่ยง</span>
+          <span class="value" style="color:#e74c3c">{{ data.forbidden or "—" }}</span>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Lucky Numbers -->
+    {% if data.lucky_numbers %}
+    <section class="seo-section" style="text-align:center">
+      <h2>🔢 เลขนำโชคประจำวัน{{ day }}</h2>
+      <div class="lucky-nums">
+        {% for num in data.lucky_numbers %}
+        <span class="num-badge">{{ num }}</span>
+        {% endfor %}
+      </div>
+      <p style="margin-top:1rem">เลขนำโชคสำหรับวัน{{ day }}นี้ เหมาะกับการซื้อหวย เล่นหุ้น หรือการเสี่ยงโชค</p>
+    </section>
+    {% endif %}
+    
+    <!-- SEO Content -->
+    <section class="seo-section">
+      <h2>🔮 ดูดวงสีมงคลวัน{{ day }}คืออะไร</h2>
+      <p><strong>สีมงคลวัน{{ day }}</strong> เป็นศาสตร์โบราณจาก<strong>ตำราฮั่วเซ่งฮง</strong> ที่สืบทอดมากว่า 100 ปี การใส่สีมงคลจะช่วยเสริมดวงชะตาในแต่ละด้านของชีวิต ไม่ว่าจะเป็น การงาน การเงิน ความรัก หรือสุขภาพ</p>
+      <p>วัน{{ day }}นี้ <strong>สีประจำวันคือ {{ data.color }}</strong> ซึ่งจะช่วยเสริมดวงด้าน {{ data.luck or "โชคลาภ" }} เป็นพิเศษ</p>
+    </section>
+    
+    <section class="seo-section">
+      <h2>❓ คำถามที่พบบ่อย — สีมงคลวัน{{ day }}</h2>
+      <div class="faq">
+        <h3>วัน{{ day }}ใส่สีอะไรดี?</h3>
+        <p>วัน{{ day }}นี้แนะนำให้ใส่<strong>สี{{ data.color }}</strong> ซึ่งเป็นสีมงคลประจำวัน จะช่วยเสริมดวงชะตาให้ดีขึ้น</p>
+        
+        <h3>สีมงคลวัน{{ day }}ใส่แล้วเฮงจริงไหม?</h3>
+        <p>ตามตำราฮั่วเซ่งฮง การใส่สีที่ตรงกับวันจะช่วยเสริมพลังงานบวกและดึงดูดโชคลาภ — {{ data.color }}เป็นสีที่เหมาะสมที่สุดสำหรับวัน{{ day }}</p>
+        
+        <h3>วัน{{ day }}ห้ามใส่สีอะไร?</h3>
+        <p>❌ ควรหลีกเลี่ยงสี <strong style="color:#e74c3c">{{ data.forbidden }}</strong> เพราะเป็นสีกาลกิณีสำหรับวัน{{ day }}</p>
+      </div>
+    </section>
+    
+    <!-- Related Days -->
+    <section class="seo-section">
+      <h2>📅 สีมงคลวันอื่นๆ</h2>
+      <div class="related-grid">
+        {% for d in ["จันทร์","อังคาร","พุธ","พฤหัส","ศุกร์","เสาร์","อาทิตย์","ราหู"] %}
+        {% if d != day %}
+        <a href="/สีมงคล/วัน-{{ d }}" class="related-card">🎨 สีมงคลวัน{{ d }}</a>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+    
+    <div class="cta-bottom" onclick="window.location='/'">
+      ✨ ดูสีมงคลวันนี้ + ดูดวงเต็มรูปแบบ → ฟรี!
+    </div>
+  </main>
+  
+  {% include 'seo_footer.html' %}
+</body>
+</html>

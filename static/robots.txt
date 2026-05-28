@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Sitemap: https://napalai.onrender.com/sitemap.xml
+
+# Disallow admin/internal paths
+Disallow: /api/*

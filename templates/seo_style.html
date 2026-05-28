@@ -1,0 +1,121 @@
+/* ═══════════════════════════════
+   SEO Landing Pages — Shared Styles
+   Dark Luxury theme, mobile-first
+   ═══════════════════════════════ */
+:root {
+  --navy-dark: #060b14;
+  --navy: #0a1628;
+  --gold: #c9a84c;
+  --gold-dim: rgba(201,168,76,0.3);
+  --gold-glow: rgba(201,168,76,0.08);
+  --ivory: #f5f0e8;
+  --ivory-muted: rgba(245,240,232,0.7);
+  --bg-card: rgba(10,22,40,0.8);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Sarabun', 'Noto Sans Thai', sans-serif;
+  background: var(--navy-dark);
+  color: var(--ivory);
+  line-height: 1.8;
+  min-height: 100vh;
+}
+a { color: var(--gold); text-decoration: none; }
+a:hover { text-decoration: underline; }
+h1 { font-size: 2rem; color: var(--gold); margin-bottom: 1rem; text-align:center; }
+h2 { font-size: 1.4rem; color: var(--ivory); margin: 1.5rem 0 0.8rem; }
+h3 { font-size: 1.1rem; color: var(--ivory-muted); margin: 1rem 0 0.5rem; }
+p, li { font-size: 1rem; color: var(--ivory-muted); margin-bottom: 0.8rem; }
+ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+li { margin-bottom: 0.4rem; }
+
+/* Header */
+.seo-header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+  border-bottom: 1px solid var(--gold-dim);
+}
+.seo-header h1 { color: var(--gold); font-size: 1.5rem; margin:0; }
+.seo-header a { display:inline-block; margin:0.5rem 0; }
+
+/* Breadcrumbs */
+.breadcrumbs { font-size: 0.85rem; color: var(--ivory-muted); margin-bottom: 2rem; padding: 0.5rem 0; }
+.breadcrumbs a { color: var(--gold-dim); }
+.breadcrumbs strong { color: var(--ivory); }
+
+/* Content */
+.seo-content { max-width: 800px; margin: 0 auto; padding: 2rem 1rem; }
+.lead { font-size: 1.1rem; text-align: center; color: var(--ivory); margin-bottom: 2rem; }
+.seo-section { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(201,168,76,0.1); }
+
+/* CTA */
+.cta-primary, .cta-bottom {
+  background: linear-gradient(135deg, var(--gold) 0%, #a88d3a 100%);
+  color: var(--navy-dark) !important;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: all 0.3s;
+}
+.cta-primary:hover, .cta-bottom:hover { transform: translateY(-2px); box-shadow: 0 4px 20px var(--gold-glow); }
+
+/* FAQ */
+.faq h3 { font-size: 1rem; margin-top: 1.5rem; }
+.faq p { font-size: 0.9rem; }
+
+/* Related Grid */
+.related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.5rem; }
+.related-card {
+  display: block;
+  padding: 0.8rem;
+  background: var(--bg-card);
+  border: 1px solid var(--gold-dim);
+  text-align: center;
+  transition: all 0.3s;
+}
+.related-card:hover { border-color: var(--gold); text-decoration: none; transform: translateY(-1px); }
+
+/* Footer */
+.seo-footer { text-align: center; padding: 2rem 1rem; border-top: 1px solid var(--gold-dim); margin-top: 2rem; }
+.seo-footer p { font-size: 0.8rem; color: var(--ivory-muted); }
+
+/* Color display */
+.color-swatch {
+  display: inline-block;
+  width: 60px; height: 60px;
+  border-radius: 12px;
+  margin: 0.5rem;
+  border: 2px solid var(--gold);
+  vertical-align: middle;
+}
+.color-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.8rem; margin: 1rem 0; }
+.color-item { background: var(--bg-card); padding: 1rem; border-radius: 8px; text-align: center; border: 1px solid var(--gold-dim); }
+.color-item .label { font-size: 0.75rem; color: var(--gold-dim); text-transform: uppercase; }
+.color-item .value { font-size: 1rem; color: var(--ivory); font-weight: 500; }
+
+/* Numeros */
+.lucky-nums { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1rem 0; justify-content: center; }
+.num-badge {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Zodiac badge */
+.zodiac-badge { display: inline-block; padding: 0.3rem 1rem; background: var(--bg-card); border: 1px solid var(--gold-dim); border-radius: 20px; }
+
+@media (max-width: 600px) {
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.2rem; }
+  .seo-content { padding: 1rem 0.8rem; }
+}
