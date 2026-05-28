@@ -311,6 +311,54 @@ def chinese():
     return jsonify({"year": year, "animal": years[year], "date": today, "reading": reading, "cached": False})
 
 
+# ── สีมงคลประจำวัน ──────────────────────────────
+COLORS_OF_DAY = {
+    "อาทิตย์": {"color": "แดง",    "hex": "#FF1744", "planet": "พระอาทิตย์",       "forbidden": "น้ำเงิน"},
+    "จันทร์":  {"color": "เหลือง",  "hex": "#FFD700", "planet": "พระจันทร์",        "forbidden": "แดง"},
+    "อังคาร":  {"color": "ชมพู",   "hex": "#FF69B4", "planet": "พระอังคาร",        "forbidden": "เหลือง, ขาว"},
+    "พุธ":     {"color": "เขียว",   "hex": "#00C853", "planet": "พระพุธ",           "forbidden": "ชมพู"},
+    "ราหู":    {"color": "ดำ",      "hex": "#1a1a1a", "planet": "พระราหู",          "forbidden": "เหลือง, ส้ม"},
+    "พฤหัส":   {"color": "ส้ม",     "hex": "#FF6D00", "planet": "พระพฤหัสบดี",       "forbidden": "ม่วง"},
+    "ศุกร์":    {"color": "ฟ้า",     "hex": "#2196F3", "planet": "พระศุกร์",          "forbidden": "เขียว, เทา"},
+    "เสาร์":    {"color": "ม่วง",    "hex": "#7C3AED", "planet": "พระเสาร์",          "forbidden": "ดำ, น้ำเงินเข้ม"},
+}
+
+@app.route("/api/colorme", methods=["POST"])
+@limiter.limit(CACHED_LIMIT)
+def colorme():
+    """Today's auspicious color — cached daily."""
+    now = datetime.now()
+    day_th = ["จันทร์","อังคาร","พุธ","พฤหัส","ศุกร์","เสาร์","อาทิตย์"][now.weekday()]
+    
+    # Wednesday night = Rahu (18:00-05:59)
+    key = day_th
+    display_day = day_th
+    if day_th == "พุธ" and (now.hour >= 18 or now.hour < 6):
+        key = "ราหู"
+        display_day = "พุธ (กลางคืน)"
+    
+    info = COLORS_OF_DAY[key]
+    track_stats("colorme")
+    
+    # Try daily cache
+    reading, _ = get_daily("colorme", key)
+    if reading:
+        return jsonify({"day": display_day, **info, "reading": reading, "cached": True})
+    
+    # AI reading
+    system = """คุณเป็นนักพยากรณ์และผู้เชี่ยวชาญด้านโหราศาสตร์ไทย 
+    ตอบด้วยภาษาไทย แบ่งเป็น: ความหมายของสี, เสริมดวงด้านใดวันนี้, 
+    เลขนำโชค, สิ่งที่ควรทำ/ควรเลี่ยง, คำแนะนำสั้นๆ"""
+    
+    prompt = f"วันนี้เป็นวัน{display_day}  ดาวประจำวันคือ{info['planet']}\nสีมงคลของวันนี้คือ {info['color']}\nสีต้องห้าม: {info['forbidden']}\n\nทำนายดวงและให้คำแนะนำการเสริมดวงด้วยสีวันนี้"
+
+    reading = ask_llm(system, prompt) or f"🎨 วัน{display_day} สีมงคล: **{info['color']}**\n\n🔮 ดาว{info['planet']} ส่งพลังด้าน{'การสื่อสารและการงาน' if key in ('พุธ','อาทิตย์') else 'ความรักและเสน่หา' if key in ('ศุกร์','จันทร์') else 'ความสำเร็จและโชคลาภ'} ในวันนี้\n\n✨ สวมใส่{info['color']}เสริมดวง หลีกเลี่ยงสี{info['forbidden']}\n🔢 เลขนำโชค: {random.randint(10,99)}"
+    
+    set("colorme", reading, key, type="daily")
+    
+    return jsonify({"day": display_day, **info, "reading": reading, "cached": False})
+
+
 # ── Stats API (for analytics/ad targeting) ───────
 
 @app.route("/api/stats")

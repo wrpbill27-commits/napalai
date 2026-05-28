@@ -93,6 +93,12 @@
       <p>ดูดวงราศีรายวัน</p>
       <span class="feat-arrow">→</span>
     </div>
+    <div class="feat-card fade-up" onclick="openFortune('colorme')" style="border-color:rgba(212,175,55,0.4);background:linear-gradient(135deg,var(--bg-card),rgba(212,175,55,0.08))">
+      <span class="feat-icon">🎨</span>
+      <h3>สีมงคลวันนี้</h3>
+      <p>ใส่สีอะไรดี? AI แนะนำ</p>
+      <span class="feat-arrow">→</span>
+    </div>
     <div class="feat-card fade-up" onclick="openFortune('chinese')">
       <span class="feat-icon">🐉</span>
       <h3>12 นักษัตร</h3>
@@ -334,6 +340,7 @@ const API = {
   birthday: ['/api/birthday', null],
   zodiac:   ['/api/zodiac', null],
   chinese:  ['/api/chinese', null],
+  colorme:  ['/api/colorme', {}],
 };
 
 let selectedZodiac = null, selectedChinese = null;
@@ -448,6 +455,13 @@ async function callAPI(type, data) {
 }
 
 function formatReading(type, data) {
+  if (type === 'colorme') {
+    const swatch = `<div style="width:80px;height:80px;border-radius:50%;background:${data.hex};margin:0 auto 16px;box-shadow:0 0 40px ${data.hex}40, 0 0 80px ${data.hex}20"></div>`;
+    const header = `<h3 style="text-align:center;font-size:18px">🎨 วัน${data.day}</h3>
+      <p style="text-align:center;font-size:15px;color:#c9a84c;margin-bottom:16px">สีมงคล: <b>${data.color}</b> | ดาว${data.planet}</p>
+      <p style="text-align:center;font-size:12px;color:var(--text-muted);margin-bottom:16px">❌ หลีกเลี่ยง: ${data.forbidden}</p>`;
+    return swatch + header + `<p>${(data.reading||'').replace(/\n/g,'<br>')}</p>`;
+  }
   if (data.reading) {
     return `<p>${data.reading.replace(/\n/g, '<br>')}</p>`;
   }
