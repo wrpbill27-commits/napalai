@@ -14,6 +14,7 @@ from cache import (
     get_stats, cache_size, MAJOR_ARCANA,
     ZODIAC_SIGNS, CHINESE_YEARS, BIRTHDAY_DAYS
 )
+from zodiac_kb import ZODIAC_KB, get_zodiac, ELEMENTS, TH_DAYS, DAY_COLORS
 
 app = Flask(__name__)
 
@@ -538,7 +539,6 @@ def sitemap_xml():
 
 
 # ── อาจารย์นภา — Personal Horoscope ────────────────
-from zodiac_kb import ZODIAC_KB, get_zodiac, ELEMENTS, TH_DAYS, DAY_COLORS
 
 @app.route("/hermes")
 def hermes_page():
