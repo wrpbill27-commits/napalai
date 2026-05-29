@@ -110,6 +110,10 @@ def index_v2():
 def index_v3():
     return render_template("versions/v3/index.html")
 
+@app.route("/v4")
+def index_v4():
+    return render_template("index_v4.html")
+
 @app.route("/classic")
 def index_classic():
     return render_template("versions/v1/index.html")
