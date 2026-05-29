@@ -181,7 +181,7 @@ section{padding:var(--space-2xl) var(--space-md);position:relative}
 }
 .hero-brand{
   font-family:'Cormorant Garamond',serif;
-  font-size:clamp(3rem,10vw,5.5rem);font-weight:300;
+  font-size:clamp(3.8rem,12vw,6.5rem);font-weight:300;
   letter-spacing:0.06em;color:var(--gold);
   opacity:0;animation:fadeUp 1.2s var(--ease-out) 0.3s forwards;
   position:relative;z-index:1;
@@ -195,7 +195,7 @@ section{padding:var(--space-2xl) var(--space-md);position:relative}
   position:relative;z-index:1;
 }
 .hero-poem{
-  font-family:'Anuphan',sans-serif;font-size:clamp(1rem,2.5vw,1.2rem);
+  font-family:'Anuphan',sans-serif;font-size:clamp(1.15rem,3vw,1.35rem);
   font-weight:200;font-style:italic;color:var(--ivory-dim);
   line-height:2;margin-bottom:var(--space-xl);max-width:420px;
   opacity:0;animation:fadeUp 1.2s var(--ease-out) 0.7s forwards;
@@ -209,7 +209,7 @@ section{padding:var(--space-2xl) var(--space-md);position:relative}
   display:inline-block;font-family:'Anuphan',sans-serif;
   font-size:0.95rem;font-weight:400;letter-spacing:0.03em;
   color:var(--navy-deep);padding:1rem 3rem;
-  background:linear-gradient(135deg,var(--gold) 0%,#b8923a 100%);
+  background:var(--gold);
   border:none;border-radius:100px;cursor:pointer;text-decoration:none;
   transition:all 0.4s var(--ease-smooth);
   box-shadow:0 4px 24px rgba(201,168,76,0.2);
@@ -310,7 +310,7 @@ section{padding:var(--space-2xl) var(--space-md);position:relative}
 }
 .testimonial-text-v4{
   font-family:'Anuphan',sans-serif;font-size:0.88rem;font-weight:300;
-  color:var(--ivory-soft);font-style:italic;line-height:1.8;margin-bottom:var(--space-md);
+  color:var(--ivory-soft);line-height:1.8;margin-bottom:var(--space-md);
 }
 .testimonial-author-v4{
   font-family:'Anuphan',sans-serif;font-size:0.85rem;font-weight:500;color:var(--ivory);
@@ -438,7 +438,7 @@ section{padding:var(--space-2xl) var(--space-md);position:relative}
 .modal-btn-v4{
   width:100%;display:block;text-align:center;font-family:'Anuphan',sans-serif;
   font-size:0.9rem;font-weight:500;color:var(--navy-deep);
-  padding:0.9rem;background:linear-gradient(135deg,var(--gold) 0%,#b8923a 100%);
+  padding:0.9rem;background:var(--gold);
   border:none;border-radius:var(--radius-sm);cursor:pointer;
   transition:all 0.3s;
 }
@@ -473,6 +473,10 @@ section{padding:var(--space-2xl) var(--space-md);position:relative}
   .hero{padding:var(--space-xl) var(--space-md) var(--space-2xl)}
   section{padding:var(--space-xl) var(--space-md)}
   .services-grid{gap:0.75rem}
+  .btn-primary{font-size:1rem;padding:1.1rem 3rem}
+  .hero-poem{font-size:1.1rem}
+  .service-name-v4{font-size:1.3rem}
+  .service-desc-v4{font-size:0.85rem}
 }
 </style>
 
@@ -528,7 +532,11 @@ section{padding:var(--space-2xl) var(--space-md);position:relative}
   <div class="section-divider"></div>
   <div class="daily-card-container">
     <div class="glass-card daily-panel reveal reveal-d1" id="dailyPanel">
-      <div class="moon-phase">🌙</div>
+      <div class="moon-phase">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.7">
+          <path d="M21 12.8a9 9 0 1 1-9.8-9.8 7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+      </div>
       <h3 id="dailyDay">—</h3>
       <p class="daily-message" id="dailyMsg">กำลังโหลดคำทำนาย...</p>
       <div class="daily-stats">
@@ -756,23 +764,29 @@ section{padding:var(--space-2xl) var(--space-md);position:relative}
 /* ── Daily Destiny Loader ── */
 (async function loadDaily(){
   try{
-    const r=await fetch('/api/colorme',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
-    const d=await r.json();
+    // Color + number from colorme API
+    const cr=await fetch('/api/colorme',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
+    const cd=await cr.json();
     const dayEl=document.getElementById('dailyDay');
-    const msgEl=document.getElementById('dailyMsg');
     const colEl=document.getElementById('dailyColor');
     const dotEl=document.getElementById('dailyColorDot');
     const numEl=document.getElementById('dailyNumber');
-    if(d.day){dayEl.textContent='วัน'+d.day}
-    if(d.color){colEl.textContent=d.color;dotEl.style.background=d.hex||'#c9a84c';dotEl.style.setProperty('--dot-color',(d.hex||'#c9a84c')+'44')}
-    if(d.lucky_numbers&&d.lucky_numbers.length){numEl.textContent=d.lucky_numbers[0]}
-    // Generate daily message from API response or fallback
-    const msg=d.reading||'';
-    const lines=msg.split('\n').filter(l=>l.trim()&&!l.includes('ใส่สี')&&!l.includes('การงาน')&&!l.includes('การเงิน')&&!l.includes('หลีกเลี่ยง')&&!l.includes('เลขนำโชค'));
-    const clean=lines[0]?lines[0].replace(/^[🎨✨💼💰💕🏥🍀🔢❌\s]+/,'').trim() : 'วันนี้เป็นวันดี มีพลังบวกจากดวงดาว';
-    if(clean.length<120)msgEl.textContent=clean;
-    else msgEl.textContent='วันนี้เป็นวันดี มีพลังบวกจากดวงดาว ลองสวมใส่สีมงคลเพื่อเสริมดวง';
-  }catch(e){document.getElementById('dailyMsg').textContent='วันนี้เป็นวันดี มีเกณฑ์โชคลาภจากผู้ใหญ่'}
+    if(cd.day){dayEl.textContent='วัน'+cd.day}
+    if(cd.color){colEl.textContent=cd.color;dotEl.style.background=cd.hex||'#c9a84c';dotEl.style.setProperty('--dot-color',(cd.hex||'#c9a84c')+'44')}
+    if(cd.lucky_numbers&&cd.lucky_numbers.length){numEl.textContent=cd.lucky_numbers[0]}
+
+    // Daily message from tarot API
+    const msgEl=document.getElementById('dailyMsg');
+    const tr=await fetch('/api/tarot',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
+    const td=await tr.json();
+    const readTxt=td.reading||'';
+    // Extract first meaningful paragraph from tarot reading
+    const clean=readTxt.split('\\n').filter(l=>l.trim().length>10&&!l.match(/^[\\d\\.\\-\\*•#]/))[0]||'';
+    if(clean&&clean.length<180){msgEl.textContent=clean.replace(/\\*\\*/g,'').trim()}
+    else{msgEl.textContent='วันนี้เป็นวันที่ดี จักรวาลส่งพลังบวกมาให้คุณ จงเปิดใจรับสิ่งใหม่ ๆ ที่กำลังจะเข้ามา'}
+  }catch(e){
+    document.getElementById('dailyMsg').textContent='วันนี้เป็นวันที่ดี จักรวาลส่งพลังบวกมาให้คุณ'
+  }
 })();
 
 /* ── Fortune Modal ── */
