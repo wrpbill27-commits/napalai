@@ -856,10 +856,23 @@ function showToast(msg){
   t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},2500);
 }
 /* ── Share ── */
+function copyText(text,label){
+  // Try modern clipboard API first
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    return navigator.clipboard.writeText(text).then(function(){showToast('📋 '+(label||'คัดลอกแล้ว!'))}).catch(function(){fallbackCopy(text,label)})
+  }
+  return fallbackCopy(text,label)
+}
+function fallbackCopy(text,label){
+  var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';ta.style.top='-9999px';document.body.appendChild(ta);
+  ta.focus();ta.select();
+  try{document.execCommand('copy');showToast('📋 '+(label||'คัดลอกแล้ว!'))}catch(e){showToast('❌ คัดลอกไม่สำเร็จ — ลองกดเลือกข้อความเอง')}
+  document.body.removeChild(ta)
+}
 function shareReading(text){
   var url=location.href;var shareText=text.slice(0,200)+(text.length>200?'...':'')+'\n\nดูดวงฟรีที่: '+url;
   if(navigator.share){navigator.share({title:'คำทำนายจากนภาลัย',text:shareText}).catch(function(){})}
-  else{navigator.clipboard.writeText(shareText).then(function(){showToast('📋 คัดลอกคำทำนายแล้ว!')}).catch(function(){showToast('คัดลอกไม่สำเร็จ')})}
+  else{copyText(shareText,'คัดลอกคำทำนายแล้ว! (ส่งต่อด้วยตัวเอง)')}
 }
 
 /* ── Fortune Modal ── */
@@ -929,10 +942,12 @@ async function fetchFortune(type,endpoint){
     }
     h+='<div class="result-block-v4">';
     var txt=d.reading||d.response||d.result||d.message||JSON.stringify(d,null,2);
+    // Store full raw text for share/copy buttons (avoids inline JS escaping issues)
+    window._lastReading=txt;
     var eTxt=escapeHtml(txt);
     h+='<p>'+eTxt.replace(/\n/g,'<br>')+'</p>';
     h+='</div>';
-    h+='<div class="modal-actions"><button class="modal-action-btn" onclick="shareReading(\''+eTxt.replace(/'/g,'\\\'').slice(0,180)+'\')">📤 แชร์</button><button class="modal-action-btn" onclick="navigator.clipboard.writeText(\''+eTxt.replace(/'/g,'\\\'').slice(0,300)+'\').then(function(){showToast(\'📋 คัดลอกแล้ว!\')})">📋 คัดลอก</button></div>';
+    h+='<div class="modal-actions"><button class="modal-action-btn" onclick="shareReading(window._lastReading)">📤 แชร์</button><button class="modal-action-btn" onclick="copyText(window._lastReading)">📋 คัดลอก</button></div>';
     re.innerHTML=h;
     saveToHistory(type,meta.title,txt);
   }catch(e){if(e.message==='TIMEOUT'){re.innerHTML='<p style="color:#e88;text-align:center">⏰ ระบบกำลังประมวลผลนานกว่าปกติ กรุณาลองใหม่อีกครั้ง</p>'}else{re.innerHTML='<p style="color:#e88;text-align:center">❌ เกิดข้อผิดพลาด: '+escapeHtml(e.message)+'</p>'}}
