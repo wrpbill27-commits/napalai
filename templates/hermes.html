@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔮 ดูดวงกับอาจารย์นภา | นภาลัย</title>
+<meta name="description" content="อาจารย์นภา — AI ดูดวงส่วนตัวจากตำราพรหมชาติ รู้ลึกถึงราศี ธาตุ ดวงดาว และเคล็ดลับเสริมดวง">
+<meta name="theme-color" content="#070a13">
+
+<!-- OG -->
+<meta property="og:title" content="ดูดวงกับอาจารย์นภา | นภาลัย">
+<meta property="og:description" content="AI ดูดวงส่วนตัวจากตำราพรหมชาติ — รู้ลึก รู้จริง รู้ดวง">
+<meta property="og:url" content="https://napalai.onrender.com/hermes">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@200;300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy: #070a13;
+  --card: #0d1020;
+  --gold: #c9a84c;
+  --gold-dim: rgba(201,168,76,0.2);
+  --gold-glow: rgba(201,168,76,0.08);
+  --violet: #8b5cf6;
+  --violet-dim: rgba(139,92,246,0.12);
+  --ivory: #f5f0e8;
+  --ivory-soft: rgba(245,240,232,0.75);
+  --ivory-dim: rgba(245,240,232,0.45);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Anuphan', sans-serif;
+  background: var(--navy);
+  color: var(--ivory);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* Starfield */
+#stars {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none;
+}
+
+/* Main container */
+.main-container {
+  position: relative; z-index: 1;
+  max-width: 680px; margin: 0 auto;
+  padding: 20px 16px 60px;
+}
+
+/* Nav */
+.nav { text-align: center; padding: 24px 0 16px; }
+.nav a {
+  color: var(--ivory-dim); text-decoration: none;
+  font-size: 0.85rem; transition: color 0.3s;
+}
+.nav a:hover { color: var(--gold); }
+
+/* Hero */
+.hero { text-align: center; padding: 20px 0 32px; }
+.hero-emoji { font-size: 4rem; margin-bottom: 8px; filter: drop-shadow(0 0 20px rgba(201,168,76,0.4)); }
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem; font-weight: 600;
+  color: var(--gold); letter-spacing: 0.02em;
+  margin-bottom: 4px;
+}
+.hero .sub {
+  font-size: 0.95rem; color: var(--ivory-dim);
+  font-weight: 300;
+}
+
+/* Glass card */
+.glass-card {
+  background: var(--card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 16px;
+  padding: 32px 24px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 60px var(--gold-glow);
+  margin-bottom: 24px;
+}
+
+.glass-card h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; color: var(--gold);
+  margin-bottom: 20px; text-align: center;
+}
+
+/* Form */
+.form-group { margin-bottom: 16px; }
+.form-group label {
+  display: block; font-size: 0.85rem;
+  color: var(--ivory-dim); margin-bottom: 6px;
+  font-weight: 500;
+}
+.form-row { display: flex; gap: 10px; }
+.form-row .form-group { flex: 1; }
+
+input, select {
+  width: 100%; padding: 12px 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 10px; color: var(--ivory);
+  font-family: 'Anuphan', sans-serif; font-size: 0.95rem;
+  transition: all 0.3s;
+  -webkit-appearance: none; appearance: none;
+}
+input:focus, select:focus {
+  outline: none; border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-dim);
+  background: rgba(255,255,255,0.07);
+}
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+  padding-right: 36px;
+}
+input::placeholder { color: rgba(245,240,232,0.25); }
+
+/* Button */
+.btn-submit {
+  width: 100%; padding: 14px;
+  background: linear-gradient(135deg, var(--gold), #d4a84b);
+  border: none; border-radius: 10px;
+  color: #070a13; font-family: 'Anuphan', sans-serif;
+  font-size: 1rem; font-weight: 600; cursor: pointer;
+  transition: all 0.3s; margin-top: 8px;
+  letter-spacing: 0.03em;
+}
+.btn-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(201,168,76,0.35);
+}
+.btn-submit:disabled {
+  opacity: 0.5; cursor: not-allowed; transform: none;
+}
+
+/* Result area */
+#result { display: none; }
+#result.show { display: block; }
+
+.result-card {
+  background: var(--card);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 16px;
+  padding: 28px 24px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 80px rgba(139,92,246,0.06);
+}
+
+.zodiac-header {
+  text-align: center; margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+.zodiac-emoji { font-size: 3.5rem; }
+.zodiac-sign {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; color: var(--gold); margin: 8px 0 2px;
+}
+.zodiac-en { font-size: 0.85rem; color: var(--ivory-dim); }
+
+.reading-text {
+  white-space: pre-line; line-height: 1.9;
+  font-size: 0.95rem;
+}
+.reading-text strong, .reading-text b { color: var(--gold); }
+
+/* Spinner */
+.spinner {
+  display: none; width: 28px; height: 28px;
+  border: 3px solid rgba(201,168,76,0.2);
+  border-top-color: var(--gold); border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 16px auto;
+}
+.spinner.active { display: block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Share */
+.share-bar { display: flex; gap: 10px; margin-top: 20px; }
+.share-btn {
+  flex: 1; padding: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px; color: var(--ivory-dim);
+  font-family: 'Anuphan', sans-serif; font-size: 0.85rem;
+  cursor: pointer; text-align: center; transition: all 0.3s;
+}
+.share-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Footer */
+.footer {
+  text-align: center; padding: 32px 0 16px;
+  font-size: 0.8rem; color: rgba(245,240,232,0.25);
+}
+.footer a { color: var(--ivory-dim); }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--card); color: var(--gold);
+  padding: 10px 20px; border-radius: 20px;
+  font-size: 0.85rem; border: 1px solid rgba(201,168,76,0.2);
+  z-index: 100; opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.toast.show { opacity: 1; }
+
+@media (max-width: 480px) {
+  .hero-emoji { font-size: 3rem; }
+  .hero h1 { font-size: 1.6rem; }
+  .glass-card { padding: 20px 16px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="main-container">
+  <nav class="nav">
+    <a href="/">← กลับหน้านภาลัย</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-emoji">🔮</div>
+    <h1>ดูดวงกับอาจารย์นภา</h1>
+    <p class="sub">AI ผู้รู้แจ้งในตำราพรหมชาติ — พยากรณ์จากวันเดือนปีเกิด</p>
+  </section>
+
+  <div class="glass-card" id="form-card">
+    <h2>✨ กรอกข้อมูลเพื่อรับคำทำนาย ✨</h2>
+    <form id="hermes-form" onsubmit="submitForm(event)">
+      <div class="form-group">
+        <label>📛 ชื่อ (ไม่จำเป็น)</label>
+        <input type="text" id="name" placeholder="ชื่อหรือชื่อเล่นของคุณ" maxlength="30">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>📅 วันเกิด</label>
+          <select id="day" required>
+            <option value="">วันที่</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>📅 เดือนเกิด</label>
+          <select id="month" required>
+            <option value="">เดือน</option>
+            <option value="1">1 — มกราคม</option>
+            <option value="2">2 — กุมภาพันธ์</option>
+            <option value="3">3 — มีนาคม</option>
+            <option value="4">4 — เมษายน</option>
+            <option value="5">5 — พฤษภาคม</option>
+            <option value="6">6 — มิถุนายน</option>
+            <option value="7">7 — กรกฎาคม</option>
+            <option value="8">8 — สิงหาคม</option>
+            <option value="9">9 — กันยายน</option>
+            <option value="10">10 — ตุลาคม</option>
+            <option value="11">11 — พฤศจิกายน</option>
+            <option value="12">12 — ธันวาคม</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>📅 ปีเกิด (พ.ศ.)</label>
+          <select id="year" required>
+            <option value="">ปี พ.ศ.</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>🚻 เพศ</label>
+        <select id="gender">
+          <option value="">ไม่ระบุ</option>
+          <option value="ชาย">ชาย</option>
+          <option value="หญิง">หญิง</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submit-btn">🔮 ดูดวงกับอาจารย์นภา</button>
+    </form>
+    <div class="spinner" id="spinner"></div>
+  </div>
+
+  <div id="result">
+    <!-- Filled by JS -->
+  </div>
+
+  <footer class="footer">
+    <p>© นภาลัย | <a href="/">NAPALAI</a> — Mystical Oracle</p>
+    <p style="margin-top:4px;">อ้างอิงจากตำราพรหมชาติฉบับสมบูรณ์</p>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════
+//  Starfield Canvas
+// ═══════════════════════════════════════
+(function() {
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initStars();
+  }
+
+  function initStars() {
+    stars = [];
+    const count = Math.floor((canvas.width * canvas.height) / 1500);
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.2 + 0.3,
+        twinkle: Math.random() * Math.PI * 2,
+        speed: 0.005 + Math.random() * 0.02,
+        opacity: 0.3 + Math.random() * 0.7
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const s of stars) {
+      s.twinkle += s.speed;
+      const alpha = s.opacity * (0.5 + 0.5 * Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201,168,76,${alpha})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+})();
+
+// ═══════════════════════════════════════
+//  Day + Year selectors
+// ═══════════════════════════════════════
+(function() {
+  const daySelect = document.getElementById('day');
+  for (let i = 1; i <= 31; i++) {
+    const opt = document.createElement('option');
+    opt.value = i; opt.textContent = i;
+    daySelect.appendChild(opt);
+  }
+
+  const yearSelect = document.getElementById('year');
+  for (let y = 2569; y >= 2440; y--) {
+    const opt = document.createElement('option');
+    opt.value = y; opt.textContent = y;
+    yearSelect.appendChild(opt);
+  }
+})();
+
+// ═══════════════════════════════════════
+//  Form submit
+// ═══════════════════════════════════════
+async function submitForm(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  const day = document.getElementById('day').value;
+  const month = document.getElementById('month').value;
+  const year = document.getElementById('year').value;
+  const gender = document.getElementById('gender').value;
+
+  const btn = document.getElementById('submit-btn');
+  const spinner = document.getElementById('spinner');
+  const result = document.getElementById('result');
+
+  // Validate
+  if (!day || !month || !year) {
+    showToast('⚠️ กรุณากรอกวันเดือนปีเกิดให้ครบ');
+    return;
+  }
+
+  btn.disabled = true;
+  spinner.classList.add('active');
+  btn.textContent = '⏳ อาจารย์นภา กำลังดูดวง...';
+
+  try {
+    const resp = await fetch('/api/hermes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name, day, month, year, gender
+      })
+    });
+
+    const data = await resp.json();
+
+    if (!resp.ok) {
+      showToast('⚠️ ' + (data.error || 'เกิดข้อผิดพลาด'));
+      return;
+    }
+
+    // Build result HTML
+    result.innerHTML = `
+      <div class="result-card">
+        <div class="zodiac-header">
+          <div class="zodiac-emoji">${data.emoji}</div>
+          <div class="zodiac-sign">ราศี${data.name_th}</div>
+          <div class="zodiac-en">${data.name_en} · เกิดวัน${data.day_of_week}</div>
+        </div>
+        <div class="reading-text">${data.reading}</div>
+        <div class="share-bar">
+          <button class="share-btn" onclick="copyReading()">📋 คัดลอก</button>
+        </div>
+      </div>
+    `;
+    result.classList.add('show');
+    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Store for copy
+    window._lastReading = data.reading;
+
+  } catch (err) {
+    showToast('⚠️ ไม่สามารถเชื่อมต่อได้ — ลองใหม่อีกครั้ง');
+    console.error(err);
+  } finally {
+    btn.disabled = false;
+    spinner.classList.remove('active');
+    btn.textContent = '🔮 ดูดวงกับอาจารย์นภา';
+  }
+}
+
+// ═══════════════════════════════════════
+//  Copy
+// ═══════════════════════════════════════
+function copyReading() {
+  const text = window._lastReading || '';
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('✅ คัดลอกคำทำนายแล้ว!');
+  }).catch(() => {
+    showToast('⚠️ ไม่สามารถคัดลอกได้');
+  });
+}
+
+// ═══════════════════════════════════════
+//  Toast
+// ═══════════════════════════════════════
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+</script>
+
+</body>
+</html>

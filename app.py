@@ -537,6 +537,98 @@ def sitemap_xml():
     return "\n".join(xml), 200, {"Content-Type": "application/xml"}
 
 
+# ── อาจารย์นภา — Personal Horoscope ────────────────
+from zodiac_kb import ZODIAC_KB, get_zodiac, ELEMENTS, TH_DAYS, DAY_COLORS
+
+@app.route("/hermes")
+def hermes_page():
+    """อาจารย์นภา — ดูดวงส่วนตัวจาก AI เจ้าแรกของไทย"""
+    return render_template("hermes.html")
+
+@app.route("/api/hermes", methods=["POST"])
+@limiter.limit("10 per minute")
+def api_hermes():
+    """Generate personalized horoscope reading from อาจารย์นภา."""
+    data = request.get_json() or {}
+    day = data.get("day")
+    month = data.get("month")
+    year_be = data.get("year")  # พ.ศ.
+    gender = data.get("gender", "ไม่ระบุ")
+    name = data.get("name", "").strip()
+
+    if not all([day, month, year_be]):
+        return jsonify({"error": "กรุณากรอกวันเดือนปีเกิดให้ครบ"}), 400
+
+    try:
+        day_i = int(day)
+        month_i = int(month)
+        year_be_i = int(year_be)
+        # Convert พ.ศ. → ค.ศ. for date calculation
+        year_ce = year_be_i - 543
+    except ValueError:
+        return jsonify({"error": "ข้อมูลไม่ถูกต้อง"}), 400
+
+    # Get zodiac
+    sign = get_zodiac(day_i, month_i)
+    z = ZODIAC_KB.get(sign, ZODIAC_KB["เมษ"])
+    el = ELEMENTS.get(z["element"], {})
+
+    # Calculate day of week
+    try:
+        from datetime import date as dt_date
+        dow = dt_date(year_ce, month_i, day_i).weekday()
+        th_day = TH_DAYS.get(dow, "ไม่ทราบ")
+    except:
+        th_day = "ไม่ทราบ"
+
+    day_color = DAY_COLORS.get(th_day, "ขาว")
+
+    # Generate reading
+    reading = f"""🔮 อาจารย์นภา พยากรณ์ 🔮
+
+{'คุณ' + name if name else 'ท่าน'} เกิดวัน{th_day} ราศี{z['sign'] if 'sign' in z else sign} ({z['en']}) {z['emoji']}
+
+✨ คำทำนายจากตำราพรหมชาติ ✨
+
+{'> ' + z['description']}
+
+═══ 🔥 บุคลิกภาพ 🔥 ═══
+{z['personality']}
+
+═══ 💕 ความรัก 💕 ═══
+{z['love']}
+
+═══ 💼 การงานที่เหมาะสม 💼 ═══
+{z['careers']}
+
+═══ 🍀 เคล็ดลับเสริมดวง 🍀 ═══
+• ธาตุประจำราศี: {z['element']} {z['element_emoji']} — {el.get('motto', '')}
+• สีมงคล: {z['colors']}
+• อัญมณี: {z['gems']}
+• ต้นไม้มงคล: {z['plants']}
+• ราศีที่ถูกโฉลก: {z['compatible']}
+• ทิศมงคล: {z['direction']}
+• สีเสื้อมงคลประจำวันเกิด ({th_day}): {day_color}
+
+═══ 📿 คำแนะนำจากอาจารย์นภา 📿 ═══
+"ดวงดาวมิได้กำหนดโชคชะตา แต่เป็นเข็มทิศนำทาง
+รู้เขา รู้เรา รู้ฟ้า รู้ดิน — แล้วชีวิตจะราบรื่น
+จงใช้จุดแข็งของชาวราศี{sign}ให้เกิดประโยชน์
+และอย่าลืมว่า... คุณคือผู้กำหนดชะตาของตัวเอง"
+
+— อาจารย์นภา 🔮
+"""
+
+    return jsonify({
+        "sign": sign,
+        "name_th": sign,
+        "name_en": z["en"],
+        "emoji": z["emoji"],
+        "day_of_week": th_day,
+        "day_color": day_color,
+        "reading": reading
+    })
+
 # ── Programmatic SEO Landing Pages ──────────────────
 @app.route("/ดูดวง/ราศี-<sign>")
 def zodiac_landing(sign):
