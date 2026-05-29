@@ -779,10 +779,10 @@ section{padding:var(--space-2xl) var(--space-md);position:relative}
     const msgEl=document.getElementById('dailyMsg');
     const tr=await fetch('/api/tarot',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
     const td=await tr.json();
-    const readTxt=td.reading||'';
-    // Extract first meaningful paragraph from tarot reading
-    const clean=readTxt.split('\\n').filter(l=>l.trim().length>10&&!l.match(/^[\\d\\.\\-\\*•#]/))[0]||'';
-    if(clean&&clean.length<180){msgEl.textContent=clean.replace(/\\*\\*/g,'').trim()}
+    const raw=td.reading||'';
+    // Strip markdown and extract first meaningful sentence(s)
+    const clean=raw.replace(/\*\*/g,'').split('\n').filter(l=>l.trim().length>8&&!l.match(/^[\d\.\-\*•#\s]+$/))[0]||'';
+    if(clean&&clean.length<240){msgEl.textContent=clean.trim()}
     else{msgEl.textContent='วันนี้เป็นวันที่ดี จักรวาลส่งพลังบวกมาให้คุณ จงเปิดใจรับสิ่งใหม่ ๆ ที่กำลังจะเข้ามา'}
   }catch(e){
     document.getElementById('dailyMsg').textContent='วันนี้เป็นวันที่ดี จักรวาลส่งพลังบวกมาให้คุณ'
