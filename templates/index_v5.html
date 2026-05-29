@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>นภาลัย | NAPALAI — Sentient Astrology</title>
+<meta name="description" content="AI ดูดวงโหราศาสตร์ไทย — ประสบการณ์สุดหรู พยากรณ์แม่นยำ ดีไซน์ระดับตำนาน">
+<meta name="theme-color" content="#080b12">
+<link rel="manifest" href="/static/manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<!-- OG -->
+<meta property="og:title" content="นภาลัย | Sentient Astrology">
+<meta property="og:description" content="AI พยากรณ์แม่นยำ — ดูดวงราศี ไพ่ทาโรต์ สีมงคล เบอร์มงคล">
+<meta property="og:image" content="https://napalai.onrender.com/static/og-image.png">
+<meta property="og:url" content="https://napalai.onrender.com">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="นภาลัย">
+<meta property="og:locale" content="th_TH">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://napalai.onrender.com">
+
+<!-- Schema -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"นภาลัย | NAPALAI","url":"https://napalai.onrender.com","description":"AI ดูดวงโหราศาสตร์ไทย — ประสบการณ์สุดหรู"}
+</script>
+
+<!-- Fonts: Anuphan (Thai) + Cormorant Garamond (English titles) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@200;300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════
+   🜁 NAPALAI v4 — LUXURY DIGITAL ORACLE
+   ═══════════════════════════════════════ */
+:root {
+  /* ── Palette ── */
+  --navy-deep: #070a13;
+  --navy-card: #0d1020;
+  --navy-surface: rgba(14, 18, 32, 0.75);
+  --gold: #c9a84c;
+  --gold-soft: rgba(201,168,76,0.65);
+  --gold-dim: rgba(201,168,76,0.2);
+  --gold-glow: rgba(201,168,76,0.08);
+  --violet: #8b5cf6;
+  --violet-soft: rgba(139,92,246,0.5);
+  --violet-dim: rgba(139,92,246,0.12);
+  --violet-glow: rgba(139,92,246,0.06);
+  --ivory: #f5f0e8;
+  --ivory-soft: rgba(245,240,232,0.75);
+  --ivory-dim: rgba(245,240,232,0.45);
+  --ivory-muted: rgba(245,240,232,0.25);
+
+  /* ── Glassmorphism ── */
+  --glass-bg: rgba(13, 16, 32, 0.55);
+  --glass-border: rgba(201,168,76,0.12);
+  --glass-border-hover: rgba(201,168,76,0.35);
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  --glass-shadow-hover: 0 12px 48px rgba(201,168,76,0.08);
+
+  /* ── Spacing ── */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+
+  /* ── Radius ── */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  /* ── Easing ── */
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{
+  font-family:'Anuphan',sans-serif;
+  background:var(--navy-deep);
+  color:var(--ivory);
+  min-height:100vh;
+  overflow-x:hidden;
+  line-height:1.75;
+  position:relative;
+}
+
+/* ── Background Layers ── */
+.bg-gradient-1{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at 30% 20%,rgba(139,92,246,0.06) 0%,transparent 60%),
+             radial-gradient(ellipse at 70% 80%,rgba(201,168,76,0.04) 0%,transparent 60%),
+             radial-gradient(ellipse at 50% 50%,rgba(13,16,32,0.8) 0%,var(--navy-deep) 100%);
+}
+.bg-gradient-2{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(600px at 50% 30%,rgba(201,168,76,0.03) 0%,transparent 100%);
+}
+#starfield{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* ── Main Content ── */
+.main-content{position:relative;z-index:1}
+
+/* ── Section Base ── */
+section{padding:var(--space-2xl) var(--space-md);position:relative}
+.section-label{
+  text-align:center;font-family:'Cormorant Garamond',serif;
+  font-size:0.7rem;letter-spacing:0.4em;color:var(--gold-soft);
+  margin-bottom:0.75rem;text-transform:uppercase;
+}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,6vw,2.8rem);font-weight:400;
+  text-align:center;color:var(--ivory);
+  margin-bottom:0.5rem;letter-spacing:0.03em;
+}
+.section-sub{
+  font-family:'Anuphan',sans-serif;font-size:0.95rem;
+  font-weight:300;color:var(--ivory-muted);
+  text-align:center;font-style:italic;margin-bottom:var(--space-xl);
+}
+.section-divider{
+  width:50px;height:1px;margin:0 auto var(--space-xl);
+  background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);
+}
+
+/* ── Glass Card ── */
+.glass-card{
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius-lg);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  box-shadow:var(--glass-shadow);
+  transition:all 0.5s var(--ease-smooth);
+  position:relative;overflow:hidden;
+}
+.glass-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.02) 0%,transparent 50%,rgba(201,168,76,0.02) 100%);
+  pointer-events:none;z-index:1;border-radius:inherit;
+}
+.glass-card:hover{
+  border-color:var(--glass-border-hover);
+  box-shadow:var(--glass-shadow-hover);
+  transform:translateY(-2px);
+}
+.glass-card.clickable{cursor:pointer}
+
+/* ── Glass Card: Service Icon (SVG) ── */
+.service-icon-svg{
+  width:48px;height:48px;margin:0 auto 1rem;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:2;
+}
+.service-icon-svg svg{width:36px;height:36px;stroke:var(--gold);fill:none;stroke-width:1.5;opacity:0.85}
+.glass-card:hover .service-icon-svg svg{opacity:1;filter:drop-shadow(0 0 8px rgba(201,168,76,0.3))}
+
+/* ═══════════════════════════════════════
+   HERO — Full Screen Cinematic
+   ═══════════════════════════════════════ */
+.hero{
+  min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:var(--space-md);
+  position:relative;
+}
+.hero::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 50%,rgba(139,92,246,0.04) 0%,transparent 70%);
+}
+.hero-constellation{position:relative;width:80px;height:80px;margin-bottom:var(--space-lg);z-index:1}
+.hero-constellation svg{width:100%;height:100%;animation:constellationBreathe 6s ease-in-out infinite}
+@keyframes constellationBreathe{
+  0%,100%{filter:drop-shadow(0 0 12px rgba(201,168,76,0.15))}
+  50%{filter:drop-shadow(0 0 32px rgba(201,168,76,0.35))}
+}
+.hero-brand{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.8rem,12vw,6.5rem);font-weight:300;
+  letter-spacing:0.06em;color:var(--gold);
+  opacity:0;animation:fadeUp 1.2s var(--ease-out) 0.3s forwards;
+  position:relative;z-index:1;
+}
+.hero-brand-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(0.7rem,2vw,0.9rem);font-weight:300;
+  letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--gold-soft);margin-bottom:var(--space-lg);
+  opacity:0;animation:fadeUp 1.2s var(--ease-out) 0.5s forwards;
+  position:relative;z-index:1;
+}
+.hero-poem{
+  font-family:'Anuphan',sans-serif;font-size:clamp(1.15rem,3vw,1.35rem);
+  font-weight:200;font-style:italic;color:var(--ivory-dim);
+  line-height:2;margin-bottom:var(--space-xl);max-width:420px;
+  opacity:0;animation:fadeUp 1.2s var(--ease-out) 0.7s forwards;
+  position:relative;z-index:1;
+}
+.hero-cta{
+  opacity:0;animation:fadeUp 1.2s var(--ease-out) 0.9s forwards;
+  position:relative;z-index:1;
+}
+.btn-primary{
+  display:inline-block;font-family:'Anuphan',sans-serif;
+  font-size:0.95rem;font-weight:400;letter-spacing:0.03em;
+  color:var(--navy-deep);padding:1rem 3rem;
+  background:var(--gold);
+  border:none;border-radius:100px;cursor:pointer;text-decoration:none;
+  transition:all 0.4s var(--ease-smooth);
+  box-shadow:0 4px 24px rgba(201,168,76,0.2);
+  position:relative;overflow:hidden;
+}
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 40px rgba(201,168,76,0.35);
+}
+.btn-primary:active{transform:translateY(0)}
+.btn-secondary{
+  display:inline-block;font-family:'Anuphan',sans-serif;
+  font-size:0.9rem;font-weight:400;color:var(--gold-soft);
+  padding:0.9rem 2.5rem;background:transparent;
+  border:1px solid var(--gold-dim);border-radius:100px;
+  cursor:pointer;text-decoration:none;
+  transition:all 0.4s var(--ease-smooth);
+}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-glow)}
+
+/* ═══════════════════════════════════════
+   DAILY DESTINY
+   ═══════════════════════════════════════ */
+.daily-section{background:transparent;padding-top:0}
+.daily-card-container{max-width:420px;margin:0 auto}
+.daily-panel{
+  padding:var(--space-lg) var(--space-md);text-align:center;
+}
+.daily-panel .moon-phase{font-size:3rem;margin-bottom:0.5rem}
+.daily-panel h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:400;color:var(--gold);margin-bottom:0.25rem}
+.daily-panel .daily-message{font-family:'Anuphan',sans-serif;font-size:0.9rem;font-weight:300;color:var(--ivory-soft);font-style:italic;margin-bottom:var(--space-md);line-height:1.8}
+.daily-stats{display:flex;justify-content:center;gap:var(--space-lg)}
+.daily-stat{text-align:center}
+.daily-stat .stat-value{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:500;color:var(--ivory)}
+.daily-stat .stat-label{font-size:0.7rem;color:var(--ivory-muted);text-transform:uppercase;letter-spacing:0.1em}
+.daily-stat .color-dot{width:32px;height:32px;border-radius:50%;margin:0 auto 0.25rem;box-shadow:0 0 20px var(--dot-color,rgba(201,168,76,0.3))}
+
+/* ═══════════════════════════════════════
+   SERVICES GRID
+   ═══════════════════════════════════════ */
+.section-services{padding-top:var(--space-xl)}
+.services-grid{
+  display:grid;grid-template-columns:1fr;gap:var(--space-sm);
+  max-width:520px;margin:0 auto;
+}
+@media(min-width:640px){.services-grid{grid-template-columns:1fr 1fr;max-width:560px}}
+@media(min-width:1024px){.services-grid{grid-template-columns:repeat(3,1fr);max-width:900px}}
+
+.service-card-v4{
+  padding:var(--space-lg) var(--space-md);text-align:center;
+}
+.service-name-v4{
+  font-family:'Cormorant Garamond',serif;font-size:1.2rem;
+  font-weight:500;color:var(--ivory);margin-bottom:0.35rem;
+  position:relative;z-index:2;
+}
+.service-desc-v4{
+  font-family:'Anuphan',sans-serif;font-size:0.8rem;
+  font-weight:300;color:var(--ivory-muted);line-height:1.6;
+  position:relative;z-index:2;
+}
+
+/* ── Ad Card in Services ── */
+.ad-card-v4{
+  padding:var(--space-lg) var(--space-md);text-align:center;
+}
+.ad-card-v4 .ad-label{
+  position:absolute;top:12px;right:14px;z-index:2;
+  font-family:'Anuphan',sans-serif;font-size:0.6rem;
+  font-weight:500;color:var(--ivory-muted);letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+.ad-card-v4 .ad-ins{
+  display:block;max-height:80px;overflow:hidden;position:relative;z-index:2;
+}
+
+/* ── Shopee Card (inline) ── */
+.shopee-card-v4{
+  padding:var(--space-lg) var(--space-md);text-align:center;
+  background:rgba(201,168,76,0.04) !important;
+  border-color:rgba(201,168,76,0.18) !important;
+}
+
+/* ═══════════════════════════════════════
+   TESTIMONIALS
+   ═══════════════════════════════════════ */
+.testimonials-grid{
+  display:grid;grid-template-columns:1fr;gap:var(--space-md);
+  max-width:520px;margin:0 auto;
+}
+@media(min-width:768px){.testimonials-grid{grid-template-columns:repeat(3,1fr);max-width:900px}}
+.testimonial-card-v4{
+  padding:var(--space-lg) var(--space-md);
+}
+.testimonial-quote{
+  font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;
+  color:var(--gold-dim);line-height:1;margin-bottom:0.75rem;
+}
+.testimonial-text-v4{
+  font-family:'Anuphan',sans-serif;font-size:0.88rem;font-weight:300;
+  color:var(--ivory-soft);line-height:1.8;margin-bottom:var(--space-md);
+}
+.testimonial-author-v4{
+  font-family:'Anuphan',sans-serif;font-size:0.85rem;font-weight:500;color:var(--ivory);
+}
+.testimonial-stars-v4{color:var(--gold-soft);font-size:0.75rem;margin-top:0.25rem;letter-spacing:0.1em}
+
+/* ═══════════════════════════════════════
+   SHOP SECTION
+   ═══════════════════════════════════════ */
+.shop-grid{
+  display:grid;grid-template-columns:1fr;gap:var(--space-sm);
+  max-width:520px;margin:0 auto;
+}
+@media(min-width:640px){.shop-grid{grid-template-columns:repeat(3,1fr);max-width:700px}}
+.shop-card{
+  padding:var(--space-lg) var(--space-md);text-align:center;
+  text-decoration:none;color:inherit;
+}
+.shop-card .shop-icon{font-size:2.2rem;margin-bottom:0.5rem;display:block}
+.shop-card h3{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;color:var(--gold);margin-bottom:0.3rem}
+.shop-card p{font-family:'Anuphan',sans-serif;font-size:0.78rem;font-weight:300;color:var(--ivory-muted);margin-bottom:0.75rem}
+.shop-card .shop-cta{
+  font-size:0.72rem;font-weight:500;color:var(--gold-soft);
+  border:1px solid var(--gold-dim);border-radius:100px;
+  padding:0.35rem 1.2rem;display:inline-block;transition:all 0.3s;
+}
+.shop-card:hover .shop-cta{background:var(--gold);color:var(--navy-deep);border-color:var(--gold)}
+.shop-disclaimer{text-align:center;font-size:0.7rem;color:var(--ivory-muted);margin-top:var(--space-lg);opacity:0.5}
+
+/* ═══════════════════════════════════════
+   FINAL CTA
+   ═══════════════════════════════════════ */
+.final-cta-section{
+  padding:var(--space-2xl) var(--space-md) calc(var(--space-2xl) + 2rem);
+  text-align:center;position:relative;
+}
+.final-cta-section::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 70%,rgba(139,92,246,0.06) 0%,transparent 70%);
+}
+.final-cta-ornament{
+  font-family:'Cormorant Garamond',serif;font-size:2rem;
+  color:var(--gold-dim);margin-bottom:var(--space-lg);
+  opacity:0.6;
+}
+.final-cta-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.6rem,5vw,2.4rem);font-weight:400;
+  color:var(--ivory);margin-bottom:var(--space-sm);
+  letter-spacing:0.03em;
+}
+.final-cta-sub{
+  font-family:'Anuphan',sans-serif;font-size:0.95rem;font-weight:300;
+  color:var(--ivory-muted);font-style:italic;margin-bottom:var(--space-lg);
+}
+/* ═══════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════ */
+.site-footer{
+  text-align:center;padding:var(--space-xl) var(--space-md);
+  border-top:1px solid rgba(255,255,255,0.04);position:relative;z-index:1;
+}
+.footer-links{display:flex;justify-content:center;gap:var(--space-lg);margin-bottom:var(--space-md);flex-wrap:wrap}
+.footer-links a{font-family:'Anuphan',sans-serif;font-size:0.8rem;font-weight:300;color:var(--ivory-muted);text-decoration:none;transition:color 0.3s}
+.footer-links a:hover{color:var(--gold-soft)}
+.footer-copy{font-size:0.72rem;color:var(--ivory-muted);font-weight:300}
+.footer-disclaimer{font-size:0.68rem;color:rgba(245,240,232,0.15);font-weight:300;font-style:italic;margin-top:0.5rem}
+
+/* ═══════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════ */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s var(--ease-out),transform 0.8s var(--ease-out)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:0.1s}
+.reveal-d2{transition-delay:0.2s}
+.reveal-d3{transition-delay:0.3s}
+.reveal-d4{transition-delay:0.4s}
+
+@keyframes slowFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+
+/* ═══════════════════════════════════════
+   MODAL
+   ═══════════════════════════════════════ */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(3,5,10,0.92);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  z-index:100;display:flex;align-items:center;justify-content:center;
+  padding:var(--space-md);opacity:0;pointer-events:none;
+  transition:opacity 0.4s var(--ease-smooth);
+}
+.modal-overlay.active{opacity:1;pointer-events:auto}
+.modal-panel{
+  background:rgba(13,16,32,0.9);border:1px solid var(--glass-border);
+  border-radius:var(--radius-lg);max-width:480px;width:100%;
+  padding:var(--space-lg) var(--space-md);position:relative;
+  max-height:85vh;overflow-y:auto;
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  box-shadow:0 16px 64px rgba(0,0,0,0.4);
+}
+.modal-close{
+  position:absolute;top:1rem;right:1rem;background:none;border:none;
+  color:var(--ivory-muted);cursor:pointer;font-size:1.2rem;
+  font-family:inherit;transition:color 0.3s;
+  width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+}
+.modal-close:hover{color:var(--gold)}
+.modal-title-v4{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--gold);text-align:center;margin-bottom:0.25rem}
+.modal-subtitle-v4{font-family:'Anuphan',sans-serif;font-size:0.85rem;color:var(--ivory-muted);text-align:center;font-style:italic;margin-bottom:var(--space-lg)}
+.modal-body-v4{color:var(--ivory-soft);font-size:0.9rem;line-height:1.8}
+.modal-input-v4{
+  width:100%;padding:0.9rem 1rem;background:rgba(255,255,255,0.04);
+  border:1px solid var(--gold-dim);border-radius:var(--radius-sm);
+  color:var(--ivory);font-family:'Anuphan',sans-serif;font-size:0.9rem;
+  margin-bottom:var(--space-md);outline:none;transition:border-color 0.3s;
+}
+.modal-input-v4:focus{border-color:var(--gold)}
+.modal-input-v4::placeholder{color:var(--ivory-muted)}
+.modal-btn-v4{
+  width:100%;display:block;text-align:center;font-family:'Anuphan',sans-serif;
+  font-size:0.9rem;font-weight:500;color:var(--navy-deep);
+  padding:0.9rem;background:var(--gold);
+  border:none;border-radius:var(--radius-sm);cursor:pointer;
+  transition:all 0.3s;
+}
+.modal-btn-v4:hover{opacity:0.9;transform:translateY(-1px)}
+.modal-btn-v4:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+.modal-loader{text-align:center;padding:2rem;color:var(--gold-dim)}
+.dot-pulse{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin:0 5px;animation:dotPulse 1.4s infinite ease-in-out both}
+.dot-pulse:nth-child(1){animation-delay:-0.32s}
+.dot-pulse:nth-child(2){animation-delay:-0.16s}
+@keyframes dotPulse{0%,80%,100%{transform:scale(0);opacity:0.3}40%{transform:scale(1);opacity:1}}
+.result-block-v4{
+  background:rgba(201,168,76,0.03);border-left:1px solid var(--gold-dim);
+  padding:var(--space-sm) var(--space-md);margin:var(--space-md) 0;
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+}
+.result-block-v4 p{font-size:0.88rem;line-height:1.8;color:var(--ivory-soft)}
+
+/* ── Colorme special ── */
+.colorme-display{text-align:center}
+.colorme-circle{
+  width:64px;height:64px;border-radius:50%;margin:0 auto var(--space-sm);
+  box-shadow:0 0 36px var(--circle-glow,rgba(201,168,76,0.3));
+  transition:all 0.5s;
+}
+.colorme-row{display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0.75rem;background:rgba(255,255,255,0.02);border-radius:var(--radius-sm);margin-bottom:0.35rem}
+.colorme-swatch{width:18px;height:18px;border-radius:50%;flex-shrink:0}
+.colorme-label-v4{font-size:0.8rem;color:var(--ivory-dim);flex:1;text-align:left}
+.colorme-value-v4{font-size:0.8rem;font-weight:500;color:var(--ivory)}
+
+
+/* ── Toast ── */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);z-index:200;
+  background:var(--gold);color:var(--navy-deep);padding:0.7rem 2rem;border-radius:100px;
+  font-family:'Anuphan',sans-serif;font-size:0.85rem;font-weight:500;
+  opacity:0;pointer-events:none;transition:opacity 0.3s;box-shadow:0 4px 20px rgba(201,168,76,0.3)}
+.toast.show{opacity:1}
+/* ── History ── */
+.history-section{padding-top:var(--space-md)}
+.history-list{max-width:420px;margin:0 auto;display:flex;flex-direction:column;gap:0.5rem}
+.history-item{font-size:0.78rem;color:var(--ivory-dim);padding:0.6rem 1rem;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:all 0.3s}
+.history-item:hover{color:var(--gold)}
+.history-item .hi-type{font-size:0.65rem;color:var(--gold-soft);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.15rem}
+.history-item .hi-date{font-size:0.62rem;color:var(--ivory-muted);float:right}
+.history-empty{text-align:center;font-size:0.8rem;color:var(--ivory-muted);padding:2rem}
+.history-clear{text-align:center;margin-top:1rem}
+.history-clear button{background:none;border:1px solid var(--gold-dim);color:var(--ivory-muted);font-size:0.7rem;padding:0.4rem 1.2rem;border-radius:100px;cursor:pointer;font-family:'Anuphan',sans-serif;transition:all 0.3s}
+.history-clear button:hover{border-color:var(--gold);color:var(--gold)}
+/* ── Modal Actions ── */
+.modal-actions{display:flex;gap:0.5rem;margin-top:var(--space-md);flex-wrap:wrap}
+.modal-action-btn{flex:1;min-width:80px;font-family:'Anuphan',sans-serif;font-size:0.72rem;font-weight:400;padding:0.5rem 0.8rem;background:rgba(255,255,255,0.04);border:1px solid var(--gold-dim);border-radius:100px;color:var(--ivory-dim);cursor:pointer;text-align:center;transition:all 0.3s}
+.modal-action-btn:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-glow)}
+
+/* ── Responsive ── */
+@media(max-width:480px){
+  .hero{padding:var(--space-xl) var(--space-md) var(--space-2xl)}
+  section{padding:var(--space-xl) var(--space-md)}
+  .services-grid{gap:0.75rem}
+  .btn-primary{font-size:1rem;padding:1.1rem 3rem}
+  .hero-poem{font-size:1.1rem}
+  .service-name-v4{font-size:1.3rem}
+  .service-desc-v4{font-size:0.85rem}
+}
+</style>
+
+<!-- AdSense -->
+<meta name="google-adsense-account" content="ca-pub-6324805521301961">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6324805521301961" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-gradient-1"></div>
+<div class="bg-gradient-2"></div>
+<canvas id="starfield"></canvas>
+
+<div class="main-content">
+
+<!-- ═══════════════════════════════════
+   HERO
+   ═══════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-constellation">
+    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="10" r="2.5" stroke="#c9a84c" fill="#c9a84c" opacity="0.9"/>
+      <circle cx="20" cy="30" r="1.5" stroke="#c9a84c" fill="#c9a84c" opacity="0.7"/>
+      <circle cx="80" cy="28" r="1.8" stroke="#c9a84c" fill="#c9a84c" opacity="0.7"/>
+      <circle cx="12" cy="62" r="1.5" stroke="#c9a84c" fill="#c9a84c" opacity="0.6"/>
+      <circle cx="88" cy="60" r="1.5" stroke="#c9a84c" fill="#c9a84c" opacity="0.6"/>
+      <circle cx="50" cy="88" r="2.5" stroke="#c9a84c" fill="#c9a84c" opacity="0.9"/>
+      <line x1="50" y1="12.5" x2="20" y2="28.5" stroke="#c9a84c" stroke-width="0.5" opacity="0.5"/>
+      <line x1="50" y1="12.5" x2="80" y2="26.5" stroke="#c9a84c" stroke-width="0.5" opacity="0.5"/>
+      <line x1="20" y1="31.5" x2="12" y2="60.5" stroke="#c9a84c" stroke-width="0.5" opacity="0.5"/>
+      <line x1="80" y1="29.5" x2="88" y2="58.5" stroke="#c9a84c" stroke-width="0.5" opacity="0.5"/>
+      <line x1="12" y1="63.5" x2="50" y2="85.5" stroke="#c9a84c" stroke-width="0.5" opacity="0.5"/>
+      <line x1="88" y1="61.5" x2="50" y2="85.5" stroke="#c9a84c" stroke-width="0.5" opacity="0.5"/>
+      <line x1="20" y1="31.5" x2="80" y2="29.5" stroke="#c9a84c" stroke-width="0.5" opacity="0.25"/>
+      <line x1="12" y1="63.5" x2="88" y2="61.5" stroke="#c9a84c" stroke-width="0.5" opacity="0.25"/>
+    </svg>
+  </div>
+  <h1 class="hero-brand">นภาลัย</h1>
+  <p class="hero-brand-sub">Napalai Astrology</p>
+  <p class="hero-poem">คืนนี้...<br>ดวงดาวอาจมีบางสิ่ง<br>จะบอกกับคุณ</p>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="document.querySelector('#services-section').scrollIntoView({behavior:'smooth'})">เริ่มคำทำนาย</button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+   DAILY DESTINY
+   ═══════════════════════════════════ -->
+<section class="daily-section">
+  <div class="section-label reveal">✦ Your Daily Oracle ✦</div>
+  <h2 class="section-title reveal">ดวงวันนี้</h2>
+  <div class="section-divider"></div>
+  <div class="daily-card-container">
+    <div class="glass-card daily-panel reveal reveal-d1" id="dailyPanel">
+      <div class="moon-phase">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.7">
+          <path d="M21 12.8a9 9 0 1 1-9.8-9.8 7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+      </div>
+      <h3 id="dailyDay">—</h3>
+      <p class="daily-message" id="dailyMsg">กำลังโหลดคำทำนาย...</p>
+      <div class="daily-stats">
+        <div class="daily-stat">
+          <div class="color-dot" id="dailyColorDot" style="background:#c9a84c;--dot-color:rgba(201,168,76,0.3)"></div>
+          <div class="stat-value" id="dailyColor">—</div>
+          <div class="stat-label">สีมงคล</div>
+        </div>
+        <div class="daily-stat">
+          <div class="stat-value" id="dailyNumber">—</div>
+          <div class="stat-label">เลขนำโชค</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+   SERVICES
+   ═══════════════════════════════════ -->
+<section class="section-services" id="services-section">
+  <div class="section-label reveal">✦ The Oracle's Archives ✦</div>
+  <h2 class="section-title reveal reveal-d1">ตำราแห่งดวงดาว</h2>
+  <p class="section-sub reveal reveal-d2">เลือกศาสตร์ที่ท่านศรัทธา</p>
+  <div class="section-divider"></div>
+
+  <div class="services-grid">
+    <!-- 1. ดูดวงชะตา -->
+    <div class="glass-card service-card-v4 clickable reveal reveal-d1" onclick="openFortune('zodiac')">
+      <div class="service-icon-svg">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="3"/></svg>
+      </div>
+      <h3 class="service-name-v4">ดูดวงชะตา</h3>
+      <p class="service-desc-v4">พยากรณ์ตามราศี<br>และตำแหน่งดาวนพเคราะห์</p>
+    </div>
+
+    <!-- 2. ไพ่ทาโรต์ -->
+    <div class="glass-card service-card-v4 clickable reveal reveal-d1" onclick="openFortune('tarot')">
+      <div class="service-icon-svg">
+        <svg viewBox="0 0 24 24"><rect x="3" y="1" width="18" height="22" rx="2"/><text x="12" y="15" text-anchor="middle" fill="#c9a84c" font-size="10" font-family="serif">✦</text></svg>
+      </div>
+      <h3 class="service-name-v4">ไพ่ทาโรต์</h3>
+      <p class="service-desc-v4">เปิดไพ่ Major Arcana<br>หยั่งรู้จากจิตใต้สำนึก</p>
+    </div>
+
+    <!-- 3. สีมงคลวันนี้ -->
+    <div class="glass-card service-card-v4 clickable reveal reveal-d1" onclick="openFortune('colorme')">
+      <div class="service-icon-svg">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20"/><path d="M12 2a10 10 0 0 0 0 20"/><circle cx="12" cy="12" r="4" fill="none"/></svg>
+      </div>
+      <h3 class="service-name-v4">สีมงคลวันนี้</h3>
+      <p class="service-desc-v4">สีนำโชคตามตำรา<br>มังกรหยก 5 หมวดหมู่</p>
+    </div>
+
+    <!-- 4. จับยาม 3 เหรียญ -->
+    <div class="glass-card service-card-v4 clickable reveal reveal-d2" onclick="openFortune('yam')">
+      <div class="service-icon-svg">
+        <svg viewBox="0 0 24 24"><circle cx="8" cy="12" r="4"/><circle cx="16" cy="8" r="4"/><circle cx="16" cy="16" r="4"/></svg>
+      </div>
+      <h3 class="service-name-v4">จับยาม 3 เหรียญ</h3>
+      <p class="service-desc-v4">เสี่ยงทายโชคชะตา<br>จากตำราโบราณ</p>
+    </div>
+
+    <!-- 5. AD -->
+    <div class="glass-card ad-card-v4 reveal reveal-d2">
+      <span class="ad-label">โฆษณา</span>
+      <div class="service-icon-svg">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z"/></svg>
+      </div>
+      <h3 class="service-name-v4">ค้นพบเพิ่มเติม</h3>
+      <p class="service-desc-v4">สินค้าและบริการ<br>ที่ท่านอาจสนใจ</p>
+      <ins class="adsbygoogle ad-ins"
+           style="display:block;max-height:80px"
+           data-ad-client="ca-pub-6324805521301961"
+           data-ad-slot="1111111111"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+
+    <!-- 6. หินมงคล (Shopee) -->
+    <div class="glass-card service-card-v4 shopee-card-v4 clickable reveal reveal-d2" onclick="document.querySelector('#shop-section').scrollIntoView({behavior:'smooth'})">
+      <div class="service-icon-svg">
+        <svg viewBox="0 0 24 24"><path d="M12 2l4 8H8l4-8z"/><path d="M12 10v12"/><path d="M8 14l4 4 4-4"/></svg>
+      </div>
+      <h3 class="service-name-v4">หินมงคล</h3>
+      <p class="service-desc-v4">เครื่องราง เสริมดวง<br>หินนำโชคจาก Shopee</p>
+    </div>
+
+    <!-- 7. เบอร์มงคล -->
+    <div class="glass-card service-card-v4 clickable reveal reveal-d2" onclick="openFortune('phone')">
+      <div class="service-icon-svg">
+        <svg viewBox="0 0 24 24"><rect x="5" y="1" width="14" height="22" rx="3"/><line x1="9" y1="19" x2="15" y2="19" stroke-width="1.5"/></svg>
+      </div>
+      <h3 class="service-name-v4">เบอร์มงคล</h3>
+      <p class="service-desc-v4">วิเคราะห์เลขมงคล<br>จากเบอร์โทรศัพท์</p>
+    </div>
+  </div>
+
+  <!-- More tiny pills -->
+  <div style="display:flex;justify-content:center;gap:0.75rem;flex-wrap:wrap;max-width:520px;margin:var(--space-lg) auto 0">
+    <span class="glass-card clickable reveal reveal-d3" style="padding:0.6rem 1.2rem;font-size:0.78rem;color:var(--ivory-dim);cursor:pointer;border-radius:100px" onclick="openFortune('compatibility')">💕 ดวงสมพงษ์</span>
+    <span class="glass-card clickable reveal reveal-d3" style="padding:0.6rem 1.2rem;font-size:0.78rem;color:var(--ivory-dim);cursor:pointer;border-radius:100px" onclick="openFortune('siamsi')">🏮 เซียมซี</span>
+    <span class="glass-card clickable reveal reveal-d3" style="padding:0.6rem 1.2rem;font-size:0.78rem;color:var(--ivory-dim);cursor:pointer;border-radius:100px" onclick="openFortune('birthday')">👶 นิสัยวันเกิด</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+   TESTIMONIALS
+   ═══════════════════════════════════ -->
+<section>
+  <div class="section-label reveal">✦ Voices of Faith ✦</div>
+  <h2 class="section-title reveal reveal-d1">เสียงจากผู้ศรัทธา</h2>
+  <p class="section-sub reveal reveal-d2">สิ่งที่ดวงดาวได้บอกผ่านเรา</p>
+  <div class="section-divider"></div>
+
+  <div class="testimonials-grid">
+    <div class="glass-card testimonial-card-v4 reveal reveal-d1">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text-v4">ดูดวงที่นี่แล้วรู้สึกสงบใจมาก ไม่ได้ทำให้กลัว แต่ทำให้เราเข้าใจตัวเองมากขึ้นค่ะ</p>
+      <p class="testimonial-author-v4">คุณมุก</p>
+      <p class="testimonial-stars-v4">★★★★★</p>
+    </div>
+    <div class="glass-card testimonial-card-v4 reveal reveal-d2">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text-v4">ไพ่ทาโรต์ที่นี่แม่นมากครับ ผมถามเรื่องงานแล้วได้คำตอบตรงมาก เหมือนมีคนเข้าใจเรา</p>
+      <p class="testimonial-author-v4">คุณต้น</p>
+      <p class="testimonial-stars-v4">★★★★★</p>
+    </div>
+    <div class="glass-card testimonial-card-v4 reveal reveal-d3">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text-v4">สีมงคลประจำวันแม่นสุด ๆ ใส่ตามที่นภาลัยแนะนำแล้ววันนั้นราบรื่นจริง ต้องลอง!</p>
+      <p class="testimonial-author-v4">คุณแพรว</p>
+      <p class="testimonial-stars-v4">★★★★★</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+   SHOP
+   ═══════════════════════════════════ -->
+<section id="shop-section">
+  <div class="section-label reveal">✦ Curated for You ✦</div>
+  <h2 class="section-title reveal reveal-d1">ของดี เสริมดวง</h2>
+  <p class="section-sub reveal reveal-d2">เลือกซื้อสินค้ามงคลจาก Shopee ราคาพิเศษ</p>
+  <div class="section-divider"></div>
+
+  <div class="shop-grid">
+    <a href="https://s.shopee.co.th/LkQJQjFdC" target="_blank" rel="nofollow sponsored" class="glass-card shop-card reveal reveal-d1">
+      <span class="shop-icon">💎</span>
+      <h3>เครื่องรางมงคล</h3>
+      <p>เสริมโชคลาภและการเงิน</p>
+      <span class="shop-cta">ดูสินค้า →</span>
+    </a>
+    <a href="https://s.shopee.co.th/8ATHe0bFQ3" target="_blank" rel="nofollow sponsored" class="glass-card shop-card reveal reveal-d2">
+      <span class="shop-icon">📿</span>
+      <h3>สร้อยข้อมือมงคล</h3>
+      <p>ใส่แล้วปัง รับทรัพย์ทั้งวัน</p>
+      <span class="shop-cta">ดูสินค้า →</span>
+    </a>
+    <a href="https://s.shopee.co.th/11076tSCM1" target="_blank" rel="nofollow sponsored" class="glass-card shop-card reveal reveal-d3">
+      <span class="shop-icon">🔮</span>
+      <h3>หินนำโชค</h3>
+      <p>หินมงคลตามราศี เสริมดวงครบ</p>
+      <span class="shop-cta">ดูสินค้า →</span>
+    </a>
+  </div>
+  <p class="shop-disclaimer reveal reveal-d4">* หากซื้อผ่านลิงก์นี้ เราอาจได้รับค่าคอมมิชชันเล็กน้อย — ขอบคุณที่สนับสนุนนภาลัยครับ 🙏</p>
+</section>
+
+<!-- ═══════════════════════════════════
+   FINAL CTA
+   ═══════════════════════════════════ -->
+<section class="final-cta-section">
+  <div class="final-cta-ornament reveal">✦</div>
+  <h2 class="final-cta-title reveal reveal-d1">พร้อมที่จะฟังเสียง<br>ของดวงดาวหรือยัง</h2>
+  <p class="final-cta-sub reveal reveal-d2">คำตอบที่คุณตามหา อาจอยู่ในค่ำคืนนี้</p>
+  <div class="reveal reveal-d3">
+    <button class="btn-primary" onclick="document.querySelector('#services-section').scrollIntoView({behavior:'smooth'})">เริ่มคำทำนายของคุณวันนี้</button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="#">Line</a>
+    <a href="#">Facebook</a>
+    <a href="#">TikTok</a>
+    <a href="#">ติดต่อลงโฆษณา</a>
+  </div>
+  <p class="footer-copy">นภาลัย · Napalai Astrology</p>
+  <p class="footer-disclaimer">เพื่อความบันเทิงและการพัฒนาตนเอง</p>
+</footer>
+
+</div><!-- /.main-content -->
+
+<!-- ═══════════════════════════════════
+   MODAL
+   ═══════════════════════════════════ -->
+<div class="modal-overlay" id="fortuneModal">
+  <div class="modal-panel">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+/* ── Starfield ── */
+(function(){
+  const c=document.getElementById('starfield'),x=c.getContext('2d');
+  let s=[],running=true,rafId=null;const N=100;
+  function R(){c.width=innerWidth;c.height=innerHeight}
+  function C(){s=[];for(let i=0;i<N;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1+0.2,a:Math.random()*0.4+0.1,f:Math.random()*0.004+0.001,d:Math.random()>.5?1:-1})}
+  function D(){if(!running){rafId=null;return}x.clearRect(0,0,c.width,c.height);for(const t of s){t.a+=t.f*t.d;if(t.a>0.55)t.d=-1;if(t.a<0.08)t.d=1;x.beginPath();x.arc(t.x,t.y,t.r,0,Math.PI*2);x.fillStyle=`rgba(229,218,198,${t.a})`;x.fill()}rafId=requestAnimationFrame(D)}
+  function stop(){running=false;if(rafId){cancelAnimationFrame(rafId);rafId=null}}
+  function start(){if(!running){running=true;D()}}
+  R();C();start();addEventListener('resize',()=>{R();C()});
+  new IntersectionObserver(e=>{e[0].isIntersecting?start():stop()},{threshold:0}).observe(c);
+})();
+
+/* ── Reveal on scroll ── */
+(function(){
+  const o=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal').forEach(e=>o.observe(e))
+})();
+
+/* ── Daily Destiny Loader ── */
+(async function loadDaily(){
+  try{
+    // Color + number from colorme API
+    const cr=await fetchWithTimeout('/api/colorme',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
+    const cd=await cr.json();
+    const dayEl=document.getElementById('dailyDay');
+    const colEl=document.getElementById('dailyColor');
+    const dotEl=document.getElementById('dailyColorDot');
+    const numEl=document.getElementById('dailyNumber');
+    if(cd.day){dayEl.textContent='วัน'+cd.day}
+    if(cd.color){colEl.textContent=cd.color;dotEl.style.background=cd.hex||'#c9a84c';dotEl.style.setProperty('--dot-color',(cd.hex||'#c9a84c')+'44')}
+    if(cd.lucky_numbers&&cd.lucky_numbers.length){numEl.textContent=cd.lucky_numbers[0]}
+
+    // Daily message from tarot API
+    const msgEl=document.getElementById('dailyMsg');
+    const tr=await fetchWithTimeout('/api/tarot',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
+    const td=await tr.json();
+    const raw=td.reading||'';
+    // Strip markdown and extract first meaningful sentence(s)
+    const clean=raw.replace(/\*\*/g,'').split('\n').filter(l=>l.trim().length>8&&!l.match(/^[\d\.\-\*•#\s]+$/))[0]||'';
+    if(clean&&clean.length<240){msgEl.textContent=clean.trim()}
+    else{msgEl.textContent='วันนี้เป็นวันที่ดี จักรวาลส่งพลังบวกมาให้คุณ จงเปิดใจรับสิ่งใหม่ ๆ ที่กำลังจะเข้ามา'}
+  }catch(e){
+    document.getElementById('dailyMsg').textContent='วันนี้เป็นวันที่ดี จักรวาลส่งพลังบวกมาให้คุณ'
+  }
+})();
+
+
+/* ── API Timeout ── */
+function fetchWithTimeout(url,opts,timeout){
+  timeout=timeout||10000;
+  return Promise.race([
+    fetch(url,opts),
+    new Promise(function(_,rej){setTimeout(function(){rej(new Error('TIMEOUT'))},timeout)})
+  ]);
+}
+/* ── History ── */
+var HK='napalai_history_v5';
+function saveToHistory(type,title,reading){
+  try{var h=JSON.parse(localStorage.getItem(HK)||'[]');h.unshift({type:type,title:title,reading:reading,ts:new Date().toISOString()});if(h.length>30)h.length=30;localStorage.setItem(HK,JSON.stringify(h));renderHistory()}catch(e){}
+}
+function getHistory(){try{return JSON.parse(localStorage.getItem(HK)||'[]')}catch(e){return[]}}
+function clearHistory(){localStorage.removeItem(HK);renderHistory()}
+function renderHistory(){
+  var el=document.getElementById('historyList');if(!el)return;
+  var h=getHistory();
+  if(!h.length){el.innerHTML='<div class="history-empty">ยังไม่มีประวัติการทำนาย</div>';return}
+  var html='';
+  for(var i=0;i<Math.min(h.length,10);i++){
+    html+='<div class="history-item" onclick="replayHistory('+i+')"><div class="hi-type">'+h[i].type+'</div><div class="hi-date">'+new Date(h[i].ts).toLocaleDateString('th-TH')+'</div><div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(h[i].title||h[i].reading.slice(0,60))+'</div></div>';
+  }
+  el.innerHTML=html;
+}
+function replayHistory(i){
+  var h=getHistory();if(!h[i])return;
+  var meta=FORTUNE_META[h[i].type];if(!meta)return;
+  openFortune(h[i].type);
+  setTimeout(function(){var re=document.getElementById('fortuneResult');if(re)re.innerHTML='<div class="result-block-v4"><p>'+escapeHtml(h[i].reading).replace(/\n/g,'<br>')+'</p></div>'},300);
+}
+/* ── Toast ── */
+function showToast(msg){
+  var t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.className='toast';document.body.appendChild(t)}
+  t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show')},2500);
+}
+/* ── Share ── */
+function shareReading(text){
+  var url=location.href;var shareText=text.slice(0,200)+(text.length>200?'...':'')+'\n\nดูดวงฟรีที่: '+url;
+  if(navigator.share){navigator.share({title:'คำทำนายจากนภาลัย',text:shareText}).catch(function(){})}
+  else{navigator.clipboard.writeText(shareText).then(function(){showToast('📋 คัดลอกคำทำนายแล้ว!')}).catch(function(){showToast('คัดลอกไม่สำเร็จ')})}
+}
+
+/* ── Fortune Modal ── */
+const FORTUNE_META={
+  tarot:{title:'ไพ่ทาโรต์',sub:'เปิดไพ่ Major Arcana — AI วิเคราะห์ทันที',endpoint:'/api/tarot',input:false},
+  yam:{title:'จับยาม 3 เหรียญ',sub:'เสี่ยงทายโชคชะตาจากตำราโบราณ',endpoint:'/api/yam',input:false},
+  phone:{title:'เบอร์มงคล',sub:'กรอกเบอร์โทรศัพท์เพื่อวิเคราะห์เลขมงคล',endpoint:'/api/phone',input:true,placeholder:'08XXXXXXXX'},
+  compatibility:{title:'ดวงสมพงษ์',sub:'กรอกวันเกิดคุณและคู่เพื่อเช็คความเข้ากัน',endpoint:'/api/compatibility',input:true,placeholder:'เช่น 15/08/2535 และ 22/12/2536'},
+  siamsi:{title:'เซียมซี',sub:'เสี่ยงเซียมซี — คำทำนายจาก 28 ใบ',endpoint:'/api/siamsi',input:false},
+  birthday:{title:'นิสัยวันเกิด',sub:'กรอกวันเกิดเพื่อวิเคราะห์นิสัยตามวัน',endpoint:'/api/birthday',input:true,placeholder:'ex. วันจันทร์'},
+  zodiac:{title:'12 ราศี',sub:'กรอกราศีของคุณเพื่อดูดวงรายวัน',endpoint:'/api/zodiac',input:true,placeholder:'เช่น มังกร, ราศีเมษ, Gemini'},
+  colorme:{title:'สีมงคลวันนี้',sub:'สีนำโชคตามตำรามังกรหยก — AI แนะนำ 5 หมวดหมู่',endpoint:'/api/colorme',input:false},
+};
+
+function openFortune(type){
+  const meta=FORTUNE_META[type];if(!meta)return;
+  const c=document.getElementById('modalContent');
+  let h=`<h3 class="modal-title-v4">${meta.title}</h3>`;
+  h+=`<p class="modal-subtitle-v4">${meta.sub}</p>`;
+  h+=`<div class="modal-body-v4">`;
+  if(meta.input){
+    h+=`<input type="text" id="fortuneInput" class="modal-input-v4" placeholder="${meta.placeholder}">`;
+    h+=`<button class="modal-btn-v4" onclick="fetchFortune('${type}','${meta.endpoint}')">🔮 ดูดวงเลย</button>`;
+  }else{
+    h+=`<div id="fortuneResult"><div class="modal-loader"><span class="dot-pulse"></span><span class="dot-pulse"></span><span class="dot-pulse"></span></div></div>`;
+  }
+  h+=`</div>`;
+  c.innerHTML=h;
+  document.getElementById('fortuneModal').classList.add('active');
+  if(!meta.input)fetchFortune(type,meta.endpoint);
+  if(meta.input){setTimeout(()=>{const i=document.getElementById('fortuneInput');if(i){i.focus();i.addEventListener('keydown',e=>{if(e.key==='Enter')fetchFortune(type,meta.endpoint)})}},100)}
+}
+function closeModal(){document.getElementById('fortuneModal').classList.remove('active')}
+document.getElementById('fortuneModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+const INPUT_BUILDERS={
+  phone:function(){var v=document.getElementById('fortuneInput');if(!v)return null;v=v.value.trim();if(!v)return null;var clean=v.replace(/[-\s]/g,'');if(!/^0\d{8,9}$/.test(clean)){var re=document.getElementById('fortuneResult');if(re)re.innerHTML='<p style="color:#e88;text-align:center">⚠ กรุณากรอกเบอร์โทร 10 หลัก (เช่น 0812345678)</p>';var b=document.querySelector('.modal-btn-v4');if(b){b.disabled=false;b.textContent='🔮 ดูดวงเลย'};return null}return{number:v}},
+  compatibility:()=>{const v=document.getElementById('fortuneInput')?.value.trim();if(!v)return null;const p=v.split(/และ|,|,/).map(s=>s.trim());return p.length<2?{person1:v,person2:''}:{person1:p[0],person2:p[1]}},
+  birthday:()=>{const v=document.getElementById('fortuneInput')?.value.trim();return v?{day:v}:null},
+  zodiac:()=>{const v=document.getElementById('fortuneInput')?.value.trim();return v?{sign:v}:null},
+};
+
+async function fetchFortune(type,endpoint){
+  const meta=FORTUNE_META[type];
+  let re=document.getElementById('fortuneResult');
+  if(!re){re=document.createElement('div');re.id='fortuneResult';document.querySelector('.modal-body-v4')?.appendChild(re)}
+  if(meta.input){const b=document.querySelector('.modal-btn-v4');if(b){b.disabled=true;b.textContent='⏳ กำลังดูดวง...'}}
+  re.innerHTML='<div class="modal-loader"><span class="dot-pulse"></span><span class="dot-pulse"></span><span class="dot-pulse"></span></div>';
+  try{
+    let body={};
+    if(meta.input){const builder=INPUT_BUILDERS[type];if(builder){body=builder();if(!body){re.innerHTML='<p style="color:#e88;text-align:center">กรุณากรอกข้อมูลก่อน</p>';if(meta.input){const b=document.querySelector('.modal-btn-v4');if(b){b.disabled=false;b.textContent='🔮 ดูดวงเลย'}}return}}}
+    const r=await fetchWithTimeout(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)},12000);
+    const d=await r.json();
+    if(type==='colorme'){renderColorme(d,re);return}
+    var h='';
+    // Tarot card mini display
+    if(type==='tarot'&&d.card){
+      h+='<div style="text-align:center;margin-bottom:1.2rem">';
+      // Real Rider-Waite-Smith tarot card image
+      if(d.card.image_url){
+        h+='<img src="'+escapeHtml(d.card.image_url)+'" alt="'+escapeHtml(d.card.name)+'" style="width:140px;height:auto;border-radius:8px;box-shadow:0 4px 24px rgba(201,168,76,0.3),0 0 0 1px var(--gold-dim);margin-bottom:0.8rem;display:block;margin-left:auto;margin-right:auto" loading="lazy">';
+      }
+      h+='<p style="font-family:\'Cormorant Garamond\',serif;font-size:1.2rem;color:var(--gold);font-weight:500">'+escapeHtml(d.card.th)+'</p>';
+      h+='<p style="font-size:0.7rem;color:var(--ivory-muted);font-style:italic">'+escapeHtml(d.card.name)+'</p>';
+      h+='</div>';
+    }
+    h+='<div class="result-block-v4">';
+    var txt=d.reading||d.response||d.result||d.message||JSON.stringify(d,null,2);
+    var eTxt=escapeHtml(txt);
+    h+='<p>'+eTxt.replace(/\n/g,'<br>')+'</p>';
+    h+='</div>';
+    h+='<div class="modal-actions"><button class="modal-action-btn" onclick="shareReading(\''+eTxt.replace(/'/g,'\\\'').slice(0,180)+'\')">📤 แชร์</button><button class="modal-action-btn" onclick="navigator.clipboard.writeText(\''+eTxt.replace(/'/g,'\\\'').slice(0,300)+'\').then(function(){showToast(\'📋 คัดลอกแล้ว!\')})">📋 คัดลอก</button></div>';
+    re.innerHTML=h;
+    saveToHistory(type,meta.title,txt);
+  }catch(e){if(e.message==='TIMEOUT'){re.innerHTML='<p style="color:#e88;text-align:center">⏰ ระบบกำลังประมวลผลนานกว่าปกติ กรุณาลองใหม่อีกครั้ง</p>'}else{re.innerHTML='<p style="color:#e88;text-align:center">❌ เกิดข้อผิดพลาด: '+escapeHtml(e.message)+'</p>'}}
+  finally{if(meta.input){const b=document.querySelector('.modal-btn-v4');if(b){b.disabled=false;b.textContent='🔮 ดูดวงอีกครั้ง'}}}
+}
+
+function renderColorme(d,re){
+  const days=['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+  const now=new Date();let dn=days[now.getDay()];
+  if(now.getDay()===3&&(now.getHours()>=18||now.getHours()<6))dn='พุธ (กลางคืน — ราหู)';
+  let h='<div class="colorme-display">';
+  h+=`<p style="font-size:0.85rem;color:var(--ivory-muted)">${dn} | ${d.day||''}</p>`;
+  if(d.hex){h+=`<div class="colorme-circle" style="background:${d.hex};--circle-glow:${d.hex}44"></div>`;h+=`<p style="color:${d.hex};font-size:1.1rem;font-weight:500">${d.color||''}</p>`}
+  if(d.planet)h+=`<p style="font-size:0.8rem;color:var(--ivory-muted)">ดาว ${d.planet}</p>`;
+  if(d.forbidden)h+=`<p style="font-size:0.78rem;color:rgba(255,255,255,0.4)">⚠ สีกาลกิณี: ${d.forbidden}</p>`;
+  h+='</div>';
+  if(d.career||d.money||d.love||d.health||d.luck){
+    h+='<div class="section-divider" style="width:30px;margin:1.5rem auto"></div>';
+    h+='<p style="text-align:center;font-size:0.82rem;color:var(--gold-soft);margin-bottom:1rem;letter-spacing:0.05em">— มังกรหยก —</p>';
+    [{l:'💼 การงาน',c:d.career},{l:'💰 การเงิน',c:d.money},{l:'💕 ความรัก',c:d.love},{l:'🏥 สุขภาพ',c:d.health},{l:'🍀 โชคลาภ',c:d.luck}].forEach(x=>{if(x.c)h+=`<div class="colorme-row"><span class="colorme-swatch" style="background:${x.c}"></span><span class="colorme-label-v4">${x.l}</span><span class="colorme-value-v4">${x.c}</span></div>`});
+    if(d.lucky_numbers)h+=`<p style="text-align:center;margin-top:1rem;font-size:0.85rem;color:var(--gold-soft)">🔢 เลขนำโชค: ${d.lucky_numbers.join(', ')}</p>`;
+  }
+  if(d.reading)h+=`<div class="result-block-v4" style="margin-top:1rem"><p>${escapeHtml(d.reading).replace(/\n/g,'<br>')}</p></div>`;
+  re.innerHTML=h;
+}
+
+function escapeHtml(s){if(!s)return'';const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+
+// Hash deep-link
+if('serviceWorker' in navigator){navigator.serviceWorker.register('/static/sw.js').catch(function(){})}
+window.addEventListener('DOMContentLoaded',function(){renderHistory();var h=location.hash.replace('#','');if(h&&FORTUNE_META[h])openFortune(h)});
+</script>
+
+
+<div id="toast" class="toast"></div>
+
+<!-- ═══════ HISTORY ═══════ -->
+<section class="history-section" style="padding-bottom:var(--space-xl)">
+  <div class="section-label reveal" style="margin-top:1rem">✦ Your Journey ✦</div>
+  <h2 class="section-title reveal reveal-d1" style="font-size:clamp(1.4rem,4vw,1.8rem)">ประวัติการทำนาย</h2>
+  <div class="section-divider"></div>
+  <div class="history-list" id="historyList">
+    <div class="history-empty">กำลังโหลด...</div>
+  </div>
+  <div class="history-clear reveal reveal-d2">
+    <button onclick="clearHistory()">🗑 ล้างประวัติ</button>
+  </div>
+</section>
+
+</body>
+</html>
