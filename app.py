@@ -96,7 +96,7 @@ def ask_llm(system_prompt, user_prompt):
 
 @app.route("/")
 def index():
-    return render_template("index.html")  # v3 — ตัวหลัก
+    return render_template("index_v5.html")  # v5 — ตัวหลัก (Sentient Astrology)
 
 @app.route("/v1")
 def index_v1():
