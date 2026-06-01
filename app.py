@@ -655,6 +655,71 @@ def chinese_landing(year):
     return render_template("seo_chinese.html", year=year, animal=years[year])
 
 
+# ══════════════════════════════════════════════════════
+# 🛡️ PUTV Stream Proxy — ป้องกัน hotlinking
+# ══════════════════════════════════════════════════════
+
+import re
+
+# Cache channel URLs in memory (refresh daily via cron)
+_channel_urls: dict = {}
+_channels_loaded_at: float = 0.0
+
+def _load_channels():
+    """Load channel stream URLs from spotv2/channels.json.
+    Only runs once per minute max to avoid disk churn."""
+    global _channel_urls, _channels_loaded_at
+    now = __import__('time').time()
+    if _channel_urls and (now - _channels_loaded_at) < 60:
+        return
+    try:
+        path = os.path.join(os.path.dirname(__file__), 'stream_channels.json')
+        with open(path) as f:
+            data = json.load(f)
+        for ch in data:
+            _channel_urls[ch['code']] = ch.get('url', '')
+        _channels_loaded_at = now
+        print(f"📺 Loaded {len(_channel_urls)} channel URLs")
+    except Exception as e:
+        print(f"⚠️ Failed to load channels: {e}")
+
+ALLOWED_REFERRERS = [
+    'wrpbill27-commits.github.io',
+    'localhost',
+    '127.0.0.1',
+    'napalai.onrender.com',
+]
+
+@app.route('/stream/<code>')
+@limiter.limit("20 per minute")
+def stream_proxy(code):
+    """Proxy stream request — checks referrer, redirects to real .m3u8"""
+    _load_channels()
+    
+    # Referrer check
+    referer = request.headers.get('Referer', '')
+    is_allowed = any(r in referer for r in ALLOWED_REFERRERS)
+    
+    if not is_allowed:
+        # Redirect leechers back to our site
+        print(f"🚫 Blocked hotlink: {referer[:80]}")
+        return '<html><meta http-equiv="refresh" content="0;url=https://wrpbill27-commits.github.io/livetv/"></html>', 403
+    
+    # Validate channel code (prevent path traversal)
+    if not re.match(r'^[a-zA-Z0-9_-]+$', code):
+        return "Invalid channel code", 400
+    
+    # Get stream URL
+    url = _channel_urls.get(code)
+    if not url:
+        # Try with resolution suffix
+        url = _channel_urls.get(f"{code}_720", '')
+    
+    if not url:
+        return f"Channel '{code}' not found. It may have been renamed.", 404
+    
+    return f'<html><meta http-equiv="refresh" content="0;url={url}"></html>'
+
 # ── Main ────────────────────────────────────────────
 if __name__ == "__main__":
     print("🔮 DuangDee — AI ดูดวงฟรี 8 ฟีเจอร์")
