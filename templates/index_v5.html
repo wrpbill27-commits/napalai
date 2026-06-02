@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<!-- Monetag Popunder -->
-<script src="https://quge5.com/88/tag.min.js" data-zone="244981" async data-cfasync="false"></script>
+<!-- Monetag Popunder (Napalai) -->
+<script src="https://5gvci.com/88/tag.min.js" data-zone="11084471" async data-cfasync="false"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>นภาลัย | NAPALAI — Sentient Astrology</title>
@@ -507,6 +507,18 @@ section{padding:var(--space-2xl) var(--space-md);position:relative}
   .service-name-v4{font-size:1.3rem}
   .service-desc-v4{font-size:0.85rem}
 }
+
+/* Monetag Banner — auto-hide when empty */
+.ad-banner {
+    max-width: 600px;
+    margin: 0 auto 24px;
+    min-height: 0;
+    overflow: hidden;
+}
+.ad-banner:empty {
+    display: none;
+    margin: 0;
+}
 </style>
 
 <!-- AdSense -->
@@ -582,6 +594,16 @@ section{padding:var(--space-2xl) var(--space-md);position:relative}
     </div>
   </div>
 </section>
+
+<!-- Monetag Banner #1 -->
+<div class="ad-banner" id="napalai-ad1"></div>
+<script>
+(function(d,z,s){
+    s.src='https://'+d+'/403/'+z;
+    s.async=true;
+    try{(document.getElementById('napalai-ad1')||document.body).appendChild(s)}catch(e){}
+})('5gvci.com',11084471,document.createElement('script'));
+</script>
 
 <!-- ═══════════════════════════════════
    SERVICES
@@ -666,6 +688,16 @@ section{padding:var(--space-2xl) var(--space-md);position:relative}
     <span class="glass-card clickable reveal reveal-d3" style="padding:0.6rem 1.2rem;font-size:0.78rem;color:var(--ivory-dim);cursor:pointer;border-radius:100px" onclick="openFortune('birthday')">👶 นิสัยวันเกิด</span>
   </div>
 </section>
+
+<!-- Monetag Banner #2 -->
+<div class="ad-banner" id="napalai-ad2"></div>
+<script>
+(function(d,z,s){
+    s.src='https://'+d+'/403/'+z;
+    s.async=true;
+    try{(document.getElementById('napalai-ad2')||document.body).appendChild(s)}catch(e){}
+})('5gvci.com',11084471,document.createElement('script'));
+</script>
 
 <!-- ═══════════════════════════════════
    TESTIMONIALS
@@ -886,6 +918,8 @@ const FORTUNE_META={
 };
 
 function openFortune(type){
+  // Monetag Direct Link — earn per fortune view
+  window.open('https://omg10.com/4/11091204','_blank');
   const meta=FORTUNE_META[type];if(!meta)return;
   const c=document.getElementById('modalContent');
   let h=`<h3 class="modal-title-v4">${meta.title}</h3>`;
