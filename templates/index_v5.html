@@ -915,8 +915,6 @@ const FORTUNE_META={
 };
 
 function openFortune(type){
-  // Monetag Direct Link — earn per fortune view
-  window.open('https://omg10.com/4/11091386','_blank');
   const meta=FORTUNE_META[type];if(!meta)return;
   const c=document.getElementById('modalContent');
   let h=`<h3 class="modal-title-v4">${meta.title}</h3>`;
@@ -1026,10 +1024,9 @@ window.addEventListener('DOMContentLoaded',function(){renderHistory();var h=loca
   </div>
 </section>
 
-<!-- Monetag SW + Popunder -->
+<!-- Monetag SW -->
 <script>
 if('serviceWorker' in navigator){navigator.serviceWorker.register('/static/sw.js').catch(()=>{});}
-(function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('al5sm.com',11091385,document.createElement('script'));
 </script>
 </body>
 </html>
